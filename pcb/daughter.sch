@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 24 Oct 2011 19:44:07 BST
+EESchema Schematic File Version 2  date Mon 24 Oct 2011 20:30:36 BST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -56,9 +56,13 @@ F0 "LiPo" 60
 F1 "lipo.sch" 60
 $EndSheet
 $Sheet
-S 2650 2200 1300 1950
+S 2950 2650 500  300 
 U 4E91B7BC
 F0 "GPS" 60
 F1 "gps.sch" 60
+F2 "RX" I R 3450 2750 60 
+F3 "TX" O R 3450 2850 60 
+F4 "GND" I L 2950 2850 60 
+F5 "VDD" I L 2950 2750 60 
 $EndSheet
 $EndSCHEMATC

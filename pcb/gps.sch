@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 24 Oct 2011 19:44:07 BST
+EESchema Schematic File Version 2  date Mon 24 Oct 2011 20:30:36 BST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -43,6 +43,18 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Text Notes 1600 6600 0    800  ~ 0
+SO MUCH PAIN
+Wire Wire Line
+	4000 3000 4000 2950
+Wire Wire Line
+	4000 2950 4100 2950
+Wire Wire Line
+	4950 4700 4950 4650
+Wire Wire Line
+	4950 4650 5000 4650
+Wire Wire Line
+	6300 3350 6450 3350
 Connection ~ 4900 4100
 Wire Wire Line
 	4900 4350 4900 4000
@@ -51,8 +63,6 @@ Wire Wire Line
 Connection ~ 4900 4300
 Wire Wire Line
 	4900 4200 5000 4200
-Wire Wire Line
-	3900 4500 3900 4550
 Wire Wire Line
 	5000 3800 4900 3800
 Wire Wire Line
@@ -68,14 +78,68 @@ Wire Wire Line
 Wire Wire Line
 	6500 4500 6500 4550
 Wire Wire Line
-	5000 3900 3900 3900
+	5000 3900 3300 3900
 Wire Wire Line
 	4900 4300 5000 4300
 Wire Wire Line
-	4900 4100 5000 4100
+	5000 4100 4900 4100
 Connection ~ 4900 4200
 Wire Wire Line
 	5000 3500 5000 3600
+Wire Wire Line
+	3300 4500 3300 4550
+Wire Wire Line
+	6300 3250 6450 3250
+Wire Wire Line
+	6300 3600 6400 3600
+Wire Wire Line
+	6400 3600 6400 3650
+Wire Wire Line
+	4000 2850 4100 2850
+Text HLabel 4100 2950 2    60   Input ~ 0
+GND
+Text HLabel 4100 2850 2    60   Input ~ 0
+VDD
+$Comp
+L GND #PWR?
+U 1 1 4EA5BC87
+P 4000 3000
+F 0 "#PWR?" H 4000 3000 30  0001 C CNN
+F 1 "GND" H 4000 2930 30  0001 C CNN
+	1    4000 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L VDD #PWR?
+U 1 1 4EA5BC86
+P 4000 2850
+F 0 "#PWR?" H 4000 2950 30  0001 C CNN
+F 1 "VDD" H 4000 2960 30  0000 C CNN
+	1    4000 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 4EA5BC26
+P 4950 4700
+F 0 "#PWR?" H 4950 4700 30  0001 C CNN
+F 1 "GND" H 4950 4630 30  0001 C CNN
+	1    4950 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 4EA5BBC0
+P 6400 3650
+F 0 "#PWR?" H 6400 3650 30  0001 C CNN
+F 1 "GND" H 6400 3580 30  0001 C CNN
+	1    6400 3650
+	1    0    0    -1  
+$EndComp
+Text HLabel 6450 3350 2    60   Input ~ 0
+RX
+Text HLabel 6450 3250 2    60   Output ~ 0
+TX
 $Comp
 L GND #PWR?
 U 1 1 4EA5B100
@@ -88,19 +152,19 @@ $EndComp
 $Comp
 L GND #PWR?
 U 1 1 4EA5B09F
-P 3900 4550
-F 0 "#PWR?" H 3900 4550 30  0001 C CNN
-F 1 "GND" H 3900 4480 30  0001 C CNN
-	1    3900 4550
+P 3300 4550
+F 0 "#PWR?" H 3300 4550 30  0001 C CNN
+F 1 "GND" H 3300 4480 30  0001 C CNN
+	1    3300 4550
 	1    0    0    -1  
 $EndComp
 $Comp
 L BATTERY BT?
 U 1 1 4EA5B095
-P 3900 4200
-F 0 "BT?" H 3900 4400 50  0000 C CNN
-F 1 "BATTERY" H 3900 4010 50  0000 C CNN
-	1    3900 4200
+P 3300 4200
+F 0 "BT?" H 3300 4400 50  0000 C CNN
+F 1 "BATTERY" H 3300 4010 50  0000 C CNN
+	1    3300 4200
 	0    -1   -1   0   
 $EndComp
 $Comp

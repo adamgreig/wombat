@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Sun 09 Oct 2011 15:55:55 BST
+EESchema Schematic File Version 2  date Sun 19 Feb 2012 01:14:43 GMT
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -34,9 +34,9 @@ LIBS:wombat-cache
 EELAYER 24  0
 EELAYER END
 $Descr A4 11700 8267
-Sheet 5 5
+Sheet 2 5
 Title "Wombat Microcontroller Schematic"
-Date "8 oct 2011"
+Date "19 feb 2012"
 Rev "1"
 Comp "C.U. Spaceflight"
 Comment1 "Drawn by Adam Greig & Jon Sowman"
@@ -45,108 +45,108 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 Wire Wire Line
-	5050 2650 5100 2650
+	5100 3550 4800 3550
+Connection ~ 9500 4250
 Wire Wire Line
-	8350 4250 8900 4250
+	9500 4350 9500 4150
 Wire Wire Line
-	9500 4250 9400 4250
-Wire Wire Line
-	7850 4150 8400 4150
-Wire Wire Line
-	7950 4250 7000 4250
-Wire Wire Line
-	6950 1800 6950 1850
-Wire Wire Line
-	6950 2250 6950 2300
-Wire Wire Line
-	4550 3000 4550 3050
-Wire Wire Line
-	7000 4950 7050 4950
-Wire Wire Line
-	7000 4750 7050 4750
-Wire Wire Line
-	7000 4550 7050 4550
-Wire Wire Line
-	7050 4050 7000 4050
-Wire Wire Line
-	7050 3850 7000 3850
-Wire Wire Line
-	7050 3650 7000 3650
-Wire Wire Line
-	7050 3350 7000 3350
-Wire Wire Line
-	7050 3150 7000 3150
-Wire Wire Line
-	7050 2950 7000 2950
-Wire Wire Line
-	7000 2750 7050 2750
-Wire Wire Line
-	6350 2250 6350 2200
-Wire Wire Line
-	6350 2200 6400 2200
-Wire Wire Line
-	4850 3000 4950 3000
-Wire Wire Line
-	4950 3000 4950 3050
-Wire Wire Line
-	4950 3050 5100 3050
-Wire Wire Line
-	5100 2850 5100 2750
-Wire Wire Line
-	5100 2750 4850 2750
-Wire Wire Line
-	4850 2750 4850 2800
-Wire Wire Line
-	4800 3600 4800 3550
-Wire Wire Line
-	4800 3550 5050 3550
-Wire Wire Line
-	6050 2300 6050 2350
-Wire Wire Line
-	6050 5250 6050 5300
-Wire Wire Line
-	5950 5250 5950 5300
-Wire Wire Line
-	5950 2300 5950 2350
-Wire Wire Line
-	5100 3350 4800 3350
-Wire Wire Line
-	4800 3350 4800 3250
-Wire Wire Line
-	4450 3750 4450 3800
-Wire Wire Line
-	5100 2950 4950 2950
-Wire Wire Line
-	6400 2100 6350 2100
-Wire Wire Line
-	7000 2650 7050 2650
-Wire Wire Line
-	7000 2850 7050 2850
-Wire Wire Line
-	7000 3050 7050 3050
-Wire Wire Line
-	7000 3250 7050 3250
-Wire Wire Line
-	7000 3550 7050 3550
-Wire Wire Line
-	7000 3750 7050 3750
-Wire Wire Line
-	7000 3950 7050 3950
-Wire Wire Line
-	7000 4450 7050 4450
-Wire Wire Line
-	7000 4650 7050 4650
-Wire Wire Line
-	7000 4850 7050 4850
-Wire Wire Line
-	4550 2550 4550 2600
+	9500 4150 8900 4150
 Wire Wire Line
 	7450 4150 7000 4150
 Wire Wire Line
-	8900 4150 9500 4150
+	4550 2550 4550 2600
 Wire Wire Line
-	9500 4150 9500 4350
-Connection ~ 9500 4250
+	7000 4850 7050 4850
+Wire Wire Line
+	7000 4650 7050 4650
+Wire Wire Line
+	7000 4450 7050 4450
+Wire Wire Line
+	7000 3950 7050 3950
+Wire Wire Line
+	7000 3750 7050 3750
+Wire Wire Line
+	7000 3550 7050 3550
+Wire Wire Line
+	7000 3250 7050 3250
+Wire Wire Line
+	7000 3050 7050 3050
+Wire Wire Line
+	7000 2850 7050 2850
+Wire Wire Line
+	7000 2650 7050 2650
+Wire Wire Line
+	6400 2100 6350 2100
+Wire Wire Line
+	5100 2950 4950 2950
+Wire Wire Line
+	4450 3750 4450 3800
+Wire Wire Line
+	4800 3250 4800 3350
+Wire Wire Line
+	4800 3350 5100 3350
+Wire Wire Line
+	5950 2300 5950 2350
+Wire Wire Line
+	5950 5250 5950 5300
+Wire Wire Line
+	6050 5250 6050 5300
+Wire Wire Line
+	6050 2300 6050 2350
+Wire Wire Line
+	4800 3550 4800 3600
+Wire Wire Line
+	4850 2800 4850 2750
+Wire Wire Line
+	4850 2750 5100 2750
+Wire Wire Line
+	5100 2750 5100 2850
+Wire Wire Line
+	5100 3050 4950 3050
+Wire Wire Line
+	4950 3050 4950 3000
+Wire Wire Line
+	4950 3000 4850 3000
+Wire Wire Line
+	6400 2200 6350 2200
+Wire Wire Line
+	6350 2200 6350 2250
+Wire Wire Line
+	7000 2750 7050 2750
+Wire Wire Line
+	7050 2950 7000 2950
+Wire Wire Line
+	7050 3150 7000 3150
+Wire Wire Line
+	7050 3350 7000 3350
+Wire Wire Line
+	7050 3650 7000 3650
+Wire Wire Line
+	7050 3850 7000 3850
+Wire Wire Line
+	7050 4050 7000 4050
+Wire Wire Line
+	7000 4550 7050 4550
+Wire Wire Line
+	7000 4750 7050 4750
+Wire Wire Line
+	7000 4950 7050 4950
+Wire Wire Line
+	4550 3000 4550 3050
+Wire Wire Line
+	6950 2250 6950 2300
+Wire Wire Line
+	6950 1800 6950 1850
+Wire Wire Line
+	7950 4250 7000 4250
+Wire Wire Line
+	7850 4150 8400 4150
+Wire Wire Line
+	9500 4250 9400 4250
+Wire Wire Line
+	8350 4250 8900 4250
+Wire Wire Line
+	5050 2650 5100 2650
 Text HLabel 5050 2650 0    60   Input ~ 0
 RESET
 $Comp
