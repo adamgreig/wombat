@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Sun 19 Feb 2012 23:33:20 GMT
+EESchema Schematic File Version 2  date Sun 19 Feb 2012 23:36:19 GMT
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -1891,6 +1891,8 @@ U 1 1 4F412174
 P 6150 7650
 F 0 "C47" H 6200 7750 50  0000 L CNN
 F 1 "100n" H 6200 7550 50  0000 L CNN
+F 2 "SM0402" H 6150 7650 60  0001 C CNN
+F 4 "1828862" H 6150 7650 60  0001 C CNN "Farnell"
 	1    6150 7650
 	0    -1   -1   0   
 $EndComp
@@ -3685,6 +3687,8 @@ U 1 1 4F407FB6
 P 6800 7400
 F 0 "P24" V 6750 7400 60  0000 C CNN
 F 1 "CONN_6" V 6850 7400 60  0000 C CNN
+F 2 "HEADER_SMD_6WAY" H 6800 7400 60  0001 C CNN
+F 4 "9689508" H 6800 7400 60  0001 C CNN "Farnell"
 	1    6800 7400
 	1    0    0    -1  
 $EndComp
