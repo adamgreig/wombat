@@ -1,4 +1,4 @@
-update=Sun 19 Feb 2012 04:42:26 GMT
+update=Sun 19 Feb 2012 16:30:44 GMT
 last_client=eeschema
 [general]
 version=1
@@ -34,7 +34,7 @@ RptD_Y=100
 RptLab=1
 SimCmd=
 UseNetN=0
-LabSize=60
+LabSize=100
 PrintMonochrome=1
 ShowSheetReferenceAndTitleBlock=1
 [eeschema/libraries]
@@ -56,3 +56,7 @@ LibName15=sl1200
 LibName16=alm-1712
 LibName17=neo6q
 LibName18=stm32f405rgt6
+LibName19=sma_jack
+LibName20=voltages
+LibName21=24aa32a
+LibName22=sj
