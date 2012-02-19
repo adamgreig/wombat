@@ -1,4 +1,4 @@
-update=Sun 19 Feb 2012 16:30:44 GMT
+update=Sun 19 Feb 2012 23:27:48 GMT
 last_client=eeschema
 [general]
 version=1
@@ -60,3 +60,4 @@ LibName19=sma_jack
 LibName20=voltages
 LibName21=24aa32a
 LibName22=sj
+LibName23=resonator
