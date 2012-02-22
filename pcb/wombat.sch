@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 22 Feb 2012 05:33:44 GMT
+EESchema Schematic File Version 2  date Wed 22 Feb 2012 05:42:40 GMT
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -3104,7 +3104,7 @@ P 9200 5150
 F 0 "R26" V 9280 5150 50  0000 C CNN
 F 1 "3k6" V 9200 5150 50  0000 C CNN
 F 2 "SM0402" H 9200 5150 60  0001 C CNN
-F 4 "1738856" H 9200 5150 60  0001 C CNN "Farnell"
+F 4 "1358057" H 9200 5150 60  0001 C CNN "Farnell"
 	1    9200 5150
 	0    1    1    0   
 $EndComp
@@ -4281,6 +4281,7 @@ U 1 1 4F407DE4
 P 750 1650
 F 0 "ANT1" H 750 1910 60  0000 C CNN
 F 1 "SL1200" H 750 1990 60  0000 C CNN
+F 2 "SL1200" H 750 1650 60  0001 C CNN
 	1    750  1650
 	1    0    0    -1  
 $EndComp
