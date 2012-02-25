@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Sat 25 Feb 2012 20:49:20 GMT
+EESchema Schematic File Version 2  date Sat 25 Feb 2012 20:53:19 GMT
 LIBS:mosfet_n
 LIBS:npn
 LIBS:power
@@ -1372,7 +1372,7 @@ P 10050 3600
 F 0 "P26" H 10050 4150 60  0000 C CNN
 F 1 "CONN_10X2" V 10050 3500 50  0000 C CNN
 F 2 "HEADER_SMD_2X10WAY" H 10050 3600 60  0001 C CNN
-F 4 "1801396" H 10050 3600 60  0001 C CNN "Farnell"
+F 4 "1428504" H 10050 3600 60  0001 C CNN "Farnell"
 	1    10050 3600
 	1    0    0    -1  
 $EndComp
