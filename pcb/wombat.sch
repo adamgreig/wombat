@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Sat 25 Feb 2012 20:53:19 GMT
+EESchema Schematic File Version 2  date Sun 26 Feb 2012 00:09:08 GMT
 LIBS:mosfet_n
 LIBS:npn
 LIBS:power
@@ -31,7 +31,7 @@ $Descr A4 11700 8267
 encoding utf-8
 Sheet 1 1
 Title "Wombat Flight Computer"
-Date "25 feb 2012"
+Date "26 feb 2012"
 Rev "1"
 Comp "CU Spaceflight"
 Comment1 "Drawn by Adam Greig"
@@ -3331,8 +3331,8 @@ Text Notes 4900 2550 0    60   ~ 0
 Config EEPROM
 Text Notes 1000 5800 0    60   ~ 0
 STM USB\nDetect
-Text Notes 3950 7550 0    60   ~ 0
-STM USB\nD+ Pullup
+Text Notes 3800 7550 0    60   ~ 0
+STM USB D+ Pullup\n(only required for\nSTM32F1x)
 Text Notes 10250 1050 0    60   ~ 0
 MAIN 3v3 SMPS
 Text Notes 8250 3650 0    60   ~ 0

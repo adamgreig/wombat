@@ -1,4 +1,4 @@
-update=Sat 25 Feb 2012 14:38:51 GMT
+update=Sun 26 Feb 2012 00:04:36 GMT
 last_client=pcbnew
 [general]
 version=1
@@ -62,8 +62,8 @@ LibName25=resonator
 [pcbnew]
 version=1
 PadDrlX=0
-PadDimH=453
-PadDimV=571
+PadDimH=504
+PadDimV=2000
 BoardThickness=630
 TxtPcbV=800
 TxtPcbH=600
@@ -75,7 +75,7 @@ DrawLar=150
 EdgeLar=150
 TxtLar=120
 MSegLar=150
-LastNetListRead=
+LastNetListRead=wombat.net
 [pcbnew/libraries]
 LibDir=libs
 LibName1=ALM-1712
@@ -105,3 +105,4 @@ LibName24=SM0805
 LibName25=SM0603
 LibName26=2032HOLDER
 LibName27=NEO6Q
+LibName28=HEADER_SMD_2X10WAY
