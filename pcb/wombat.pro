@@ -1,4 +1,4 @@
-update=Sun 26 Feb 2012 04:22:13 GMT
+update=Sun 26 Feb 2012 14:36:28 GMT
 last_client=pcbnew
 [general]
 version=1
@@ -59,11 +59,12 @@ LibName22=voltages
 LibName23=24aa32a
 LibName24=sj
 LibName25=resonator
+LibName26=microsd
 [pcbnew]
 version=1
 PadDrlX=0
-PadDimH=290
-PadDimV=1150
+PadDimH=299
+PadDimV=945
 BoardThickness=630
 TxtPcbV=800
 TxtPcbH=600
@@ -107,3 +108,4 @@ LibName26=2032HOLDER
 LibName27=NEO6Q
 LibName28=HEADER_SMD_2X10WAY
 LibName29=HEADER_SMD_2X5WAY
+LibName30=MICROSD

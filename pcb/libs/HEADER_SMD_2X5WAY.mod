@@ -1,4 +1,4 @@
-PCBNEW-LibModule-V1  Sun 26 Feb 2012 05:05:25 GMT
+PCBNEW-LibModule-V1  Sun 26 Feb 2012 14:48:49 GMT
 # encoding utf-8
 $INDEX
 HEADER_SMD_2X5WAY
