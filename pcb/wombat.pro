@@ -1,4 +1,4 @@
-update=Sun 26 Feb 2012 00:04:36 GMT
+update=Sun 26 Feb 2012 04:22:13 GMT
 last_client=pcbnew
 [general]
 version=1
@@ -62,8 +62,8 @@ LibName25=resonator
 [pcbnew]
 version=1
 PadDrlX=0
-PadDimH=504
-PadDimV=2000
+PadDimH=290
+PadDimV=1150
 BoardThickness=630
 TxtPcbV=800
 TxtPcbH=600
@@ -106,3 +106,4 @@ LibName25=SM0603
 LibName26=2032HOLDER
 LibName27=NEO6Q
 LibName28=HEADER_SMD_2X10WAY
+LibName29=HEADER_SMD_2X5WAY

@@ -1,26 +1,16 @@
-# EESchema Netlist Version 1.1 created  Sun 26 Feb 2012 00:04:51 GMT
+# EESchema Netlist Version 1.1 created  Sun 26 Feb 2012 04:27:40 GMT
 (
- ( /4F49408A HEADER_SMD_2X10WAY  P26 CONN_10X2 {Lib=CONN_10X2}
+ ( /4F49B3C3 HEADER_SMD_2X5WAY  P26 CONN_5X2 {Lib=CONN_5X2}
   (    1 3V3 )
-  (    2 3V3 )
-  (    3 JNTRST )
-  (    4 GND )
-  (    5 JTDI )
-  (    6 GND )
-  (    7 JTMS )
-  (    8 GND )
-  (    9 JTCK )
-  (   10 GND )
-  (   11 ? )
-  (   12 GND )
-  (   13 JTDO )
-  (   14 GND )
-  (   15 NRST )
-  (   16 GND )
-  (   17 ? )
-  (   18 GND )
-  (   19 ? )
-  (   20 GND )
+  (    2 JTMS )
+  (    3 GND )
+  (    4 JTCK )
+  (    5 GND )
+  (    6 JTDO )
+  (    7 ? )
+  (    8 JTDI )
+  (    9 GND )
+  (   10 NRST )
  )
  ( /4F493EE8 SM0402  R42 1k {Lib=R}
   (    1 N-000102 )
@@ -31,11 +21,11 @@
   (    2 N-000101 )
  )
  ( /4F447B57 SM0402  R7 1M1 {Lib=R}
-  (    1 N-000127 )
+  (    1 N-000123 )
   (    2 VIN )
  )
  ( /4F447B51 SM0402  R8 100k {Lib=R}
-  (    1 N-000127 )
+  (    1 N-000123 )
   (    2 GND )
  )
  ( /4F4476FE SM0603  C11 4µ7 {Lib=C}
@@ -47,31 +37,31 @@
   (    2 VIN )
  )
  ( /4F446C09 SM0402  R34 330 {Lib=R}
-  (    1 N-000075 )
-  (    2 N-000125 )
+  (    1 N-000071 )
+  (    2 N-000121 )
  )
  ( /4F446C04 SM0603  D6 LED {Lib=LED}
-  (    1 N-000125 )
+  (    1 N-000121 )
   (    2 GND )
  )
  ( /4F44674C SM0603  L4 FB {Lib=INDUCTOR}
-  (    1 N-000117 )
+  (    1 N-000116 )
   (    2 VIN )
  )
  ( /4F446693 RADIAL-5  C18 4700µ {Lib=CP1}
-  (    1 N-000063 )
+  (    1 N-000131 )
   (    2 GND )
  )
  ( /4F446688 SM0402  C19 100n {Lib=C}
-  (    1 N-000063 )
+  (    1 N-000131 )
   (    2 GND )
  )
  ( /4F446683 SM0402  R9 100R {Lib=R}
-  (    1 N-000063 )
-  (    2 N-000117 )
+  (    1 N-000131 )
+  (    2 N-000116 )
  )
  ( /4F44667A SM0402  R13 10k {Lib=R}
-  (    1 N-000062 )
+  (    1 N-000064 )
   (    2 PYRO_TEST )
  )
  ( /4F446677 SM0402  R17 10k {Lib=R}
@@ -79,9 +69,9 @@
   (    2 PYRO_TEST )
  )
  ( /4F418586 RESONATOR  X1 8MHz {Lib=RESONATOR}
-  (    1 N-000079 )
+  (    1 N-000067 )
   (    2 GND )
-  (    3 N-000071 )
+  (    3 N-000068 )
  )
  ( /4F414B34 SM0603  D5 LED {Lib=LED}
   (    1 N-000021 )
@@ -92,19 +82,19 @@
   (    2 GND )
  )
  ( /4F414B2D SM0402  R32 330 {Lib=R}
-  (    1 N-000076 )
+  (    1 N-000073 )
   (    2 N-000021 )
  )
  ( /4F414B2B SM0402  R30 330 {Lib=R}
-  (    1 N-000077 )
+  (    1 N-000074 )
   (    2 N-000020 )
  )
  ( /4F414AB6 SM0402  R29 330 {Lib=R}
-  (    1 N-000078 )
-  (    2 N-000032 )
+  (    1 N-000075 )
+  (    2 N-000019 )
  )
  ( /4F414AAD SM0603  D3 LED {Lib=LED}
-  (    1 N-000032 )
+  (    1 N-000019 )
   (    2 GND )
  )
  ( /4F4149CC SM0402  R37 10k {Lib=R}
@@ -123,21 +113,21 @@
   (    1 PYRO_FIRE )
  )
  ( /4F414478 SM0402  R11 100R {Lib=R}
-  (    1 N-000128 )
+  (    1 N-000130 )
   (    2 PYRO_FIRE )
  )
  ( /4F414472 SM0402  R16 10k {Lib=R}
-  (    1 N-000128 )
+  (    1 N-000130 )
   (    2 GND )
  )
  ( /4F41441C BLOCK-3.5mm-2  P13 PYRO {Lib=CONN_2}
-  (    1 N-000063 )
-  (    2 N-000062 )
+  (    1 N-000131 )
+  (    2 N-000064 )
  )
  ( /4F414414 SOT-23-3  Q1 MOSFET_N {Lib=MOSFET_N}
-  (    1 N-000128 )
+  (    1 N-000130 )
   (    2 GND )
-  (    3 N-000062 )
+  (    3 N-000064 )
  )
  ( /4F41280F TP  P25 TST {Lib=TST}
   (    1 NRST )
@@ -149,25 +139,25 @@
   (    1 USART1_RX )
  )
  ( /4F4127E7 TP  P18 TST {Lib=TST}
-  (    1 N-000068 )
+  (    1 N-000118 )
  )
  ( /4F4127DF TP  P17 TST {Lib=TST}
-  (    1 N-000132 )
+  (    1 N-000137 )
  )
  ( /4F4127D2 TP  P21 TST {Lib=TST}
-  (    1 N-000080 )
+  (    1 ADF_DATA )
  )
  ( /4F4127D1 TP  P20 TST {Lib=TST}
-  (    1 N-000133 )
+  (    1 ADF_CLK )
  )
  ( /4F4127CF TP  P19 TST {Lib=TST}
-  (    1 N-000067 )
+  (    1 ADF_CLKOUT )
  )
  ( /4F4127C0 TP  P15 TST {Lib=TST}
-  (    1 N-000126 )
+  (    1 ADF_TXDATA )
  )
  ( /4F4127B5 TP  P14 TST {Lib=TST}
-  (    1 N-000140 )
+  (    1 ADF_TXCLK )
  )
  ( /4F412796 TP  P16 TST {Lib=TST}
   (    1 ADF_MUXOUT )
@@ -212,16 +202,16 @@
   (    2 N-000097 )
  )
  ( /4F4123F1 SJ  SJ2 SJ {Lib=SJ}
-  (    1 N-000138 )
+  (    1 N-000062 )
   (    2 GND )
  )
  ( /4F4123EC SJ  SJ1 SJ {Lib=SJ}
-  (    1 N-000011 )
+  (    1 N-000007 )
   (    2 GND )
  )
  ( /4F412174 SM0402  C49 100n {Lib=C}
   (    1 NRST )
-  (    2 N-000082 )
+  (    2 N-000079 )
  )
  ( /4F411E3F SM0402  C22 1µ {Lib=C}
   (    1 3V3 )
@@ -252,11 +242,11 @@
   (    2 GND )
  )
  ( /4F411DC3 SM0603  C38 2µ2 {Lib=C}
-  (    1 N-000138 )
+  (    1 N-000062 )
   (    2 GND )
  )
  ( /4F411DAA SM0603  C37 2µ2 {Lib=C}
-  (    1 N-000011 )
+  (    1 N-000007 )
   (    2 GND )
  )
  ( /4F41124D SM0402  R10 4k7 {Lib=R}
@@ -272,28 +262,28 @@
   (    2 GND )
  )
  ( /4F411059 SM0402  C29 10n {Lib=C}
-  (    1 GND )
-  (    2 N-000140 )
+  (    1 ADF_TXDATA )
+  (    2 GND )
  )
  ( /4F411057 SM0402  C34 10n {Lib=C}
-  (    1 GND )
-  (    2 N-000126 )
+  (    1 ADF_TXCLK )
+  (    2 GND )
  )
  ( /4F410FB8 SM0402  R33 1k {Lib=R}
-  (    1 N-000132 )
+  (    1 N-000137 )
   (    2 ADF_LE )
  )
  ( /4F410FB3 SM0402  R31 1k {Lib=R}
-  (    1 N-000068 )
+  (    1 N-000118 )
   (    2 ADF_CE )
  )
  ( /4F410F96 SM0402  R28 1k {Lib=R}
   (    1 ADF_MUXOUT )
-  (    2 N-000008 )
+  (    2 N-000001 )
  )
  ( /4F410F8F SM0402  R27 1k {Lib=R}
   (    1 ADF_TXCLK )
-  (    2 N-000140 )
+  (    2 N-000077 )
  )
  ( /4F410F8C SM0402  R25 1k {Lib=R}
   (    1 ADF_TXDATA )
@@ -301,86 +291,86 @@
  )
  ( /4F410F0A SM0402  C43 26p {Lib=C}
   (    1 GND )
-  (    2 N-000004 )
+  (    2 N-000005 )
  )
  ( /4F410F01 SM0402  C40 26p {Lib=C}
   (    1 GND )
-  (    2 N-000005 )
+  (    2 N-000006 )
  )
  ( /4F410EF6 HC49  X2 4.9152MHz {Lib=CRYSTAL}
-  (    1 N-000005 )
-  (    2 N-000004 )
+  (    1 N-000006 )
+  (    2 N-000005 )
  )
  ( /4F410EE9 SM0402  R35 1k {Lib=R}
-  (    1 N-000067 )
+  (    1 N-000085 )
   (    2 ADF_CLKOUT )
  )
  ( /4F410EE7 SM0402  R36 1k {Lib=R}
-  (    1 N-000133 )
+  (    1 N-000004 )
   (    2 ADF_CLK )
  )
  ( /4F410ECB SM0402  R38 1k {Lib=R}
-  (    1 N-000080 )
+  (    1 N-000076 )
   (    2 ADF_DATA )
  )
  ( /4F410DC6 SM0402  C32 270p {Lib=C}
-  (    1 N-000135 )
+  (    1 N-000133 )
   (    2 GND )
  )
  ( /4F410DC0 SM0402  R24 910 {Lib=R}
   (    1 GND )
-  (    2 N-000015 )
+  (    2 N-000016 )
  )
  ( /4F410DBA SM0402  R23 3k3 {Lib=R}
-  (    1 N-000135 )
-  (    2 N-000139 )
- )
- ( /4F410DB6 SM0402  C31 12n {Lib=C}
-  (    1 N-000139 )
+  (    1 N-000133 )
   (    2 N-000015 )
  )
+ ( /4F410DB6 SM0402  C31 12n {Lib=C}
+  (    1 N-000015 )
+  (    2 N-000016 )
+ )
  ( /4F410DAF SM0402  C30 680p {Lib=C}
-  (    1 N-000139 )
+  (    1 N-000015 )
   (    2 GND )
  )
  ( /4F410D6F SM0402  L6 27n {Lib=INDUCTOR}
-  (    1 N-000115 )
+  (    1 N-000114 )
   (    2 3V3 )
  )
  ( /4F410D5D SM0402  L9 6n2 {Lib=INDUCTOR}
-  (    1 N-000019 )
-  (    2 N-000115 )
+  (    1 N-000014 )
+  (    2 N-000114 )
  )
  ( /4F410D52 SM0402  C42 470p {Lib=C}
-  (    1 N-000019 )
-  (    2 N-000137 )
+  (    1 N-000014 )
+  (    2 N-000135 )
  )
  ( /4F410D2E SM0402  C41 3p3 {Lib=C}
-  (    1 N-000137 )
+  (    1 N-000135 )
   (    2 GND )
  )
  ( /4F410D26 SM0402  L7 22n {Lib=INDUCTOR}
-  (    1 N-000137 )
-  (    2 N-000136 )
+  (    1 N-000135 )
+  (    2 N-000134 )
  )
  ( /4F410CF0 SM0402  C36 8p2 {Lib=C}
-  (    1 N-000136 )
+  (    1 N-000134 )
   (    2 GND )
  )
  ( /4F410CBD SM0402  C23 3p3 {Lib=C}
-  (    1 N-000014 )
+  (    1 N-000013 )
   (    2 GND )
  )
  ( /4F410C64 SM0402  C33 22n {Lib=C}
   (    1 N-000018 )
-  (    2 N-000012 )
+  (    2 N-000017 )
  )
  ( /4F410C50 SM0402  C35 470n {Lib=C}
   (    1 GND )
-  (    2 N-000012 )
+  (    2 N-000017 )
  )
  ( /4F410C32 SM0603  C39 2µ2 {Lib=C}
-  (    1 N-000081 )
+  (    1 N-000078 )
   (    2 GND )
  )
  ( /4F410BC8 SM0402  C44 100n {Lib=C}
@@ -405,15 +395,15 @@
  )
  ( /4F410B8D SM0402  R26 3k6 {Lib=R}
   (    1 GND )
-  (    2 N-000087 )
+  (    2 N-000084 )
  )
  ( /4F410B34 SM0402  L8 22n {Lib=INDUCTOR}
-  (    1 N-000086 )
-  (    2 N-000085 )
+  (    1 N-000083 )
+  (    2 N-000082 )
  )
  ( /4F410B12 SM0402  L5 22n {Lib=INDUCTOR}
-  (    1 N-000136 )
-  (    2 N-000014 )
+  (    1 N-000134 )
+  (    2 N-000013 )
  )
  ( /4F4109AD SM0402  R20 22k {Lib=R}
   (    1 STM_USB_V )
@@ -424,7 +414,7 @@
   (    2 VBUS )
  )
  ( /4F410927 SM0402  R22 1k5 {Lib=R}
-  (    1 N-000107 )
+  (    1 N-000011 )
   (    2 STM_DP )
  )
  ( /4F410826 SOT-666  D2 USBLC6-2 {Lib=USBLC6-2}
@@ -451,17 +441,17 @@
   (    2 GND )
   (    3 GND )
   (    4 GND )
-  (    5 N-000093 )
-  (    6 N-000111 )
+  (    5 N-000091 )
+  (    6 N-000110 )
   (    7 GND )
   (    8 3V3 )
  )
  ( /4F40F592 SM0402  R6 22 {Lib=R}
-  (    1 N-000089 )
+  (    1 N-000087 )
   (    2 GPS_DM )
  )
  ( /4F40F58E SM0402  R3 22 {Lib=R}
-  (    1 N-000109 )
+  (    1 N-000108 )
   (    2 GPS_DP )
  )
  ( /4F40F553 SM0402  R2 10k {Lib=R}
@@ -477,32 +467,32 @@
   (    2 GND )
  )
  ( /4F40905C SM0402  R1 12R {Lib=R}
-  (    1 N-000116 )
+  (    1 N-000115 )
   (    2 2v7 )
  )
  ( /4F409052 SM0402  L2 22n {Lib=INDUCTOR}
-  (    1 N-000116 )
+  (    1 N-000115 )
   (    2 2v7 )
  )
  ( /4F409022 SM0402  C6 15p {Lib=C}
-  (    1 N-000116 )
+  (    1 N-000115 )
   (    2 GND )
  )
  ( /4F408E93 SM0402  C7 6p8 {Lib=C}
   (    1 GND )
-  (    2 N-000091 )
+  (    2 N-000089 )
  )
  ( /4F408E90 SM0402  C4 100n {Lib=C}
   (    1 2v7 )
   (    2 GND )
  )
  ( /4F408E8C SM0402  L3 6n8 {Lib=INDUCTOR}
-  (    1 N-000116 )
-  (    2 N-000091 )
+  (    1 N-000115 )
+  (    2 N-000089 )
  )
  ( /4F408E87 SM0402  R5 8k2 {Lib=R}
-  (    1 N-000091 )
-  (    2 N-000113 )
+  (    1 N-000089 )
+  (    2 N-000112 )
  )
  ( /4F408D88 SM0402  C17 1µ {Lib=C}
   (    1 2v7 )
@@ -521,11 +511,11 @@
   (    2 GND )
  )
  ( /4F408C5A SM0805  L1 2µ2 {Lib=INDUCTOR}
-  (    1 N-000074 )
+  (    1 N-000070 )
   (    2 VIN )
  )
  ( /4F408BCE SM0402  C12 100n {Lib=C}
-  (    1 N-000114 )
+  (    1 N-000113 )
   (    2 GND )
  )
  ( /4F408B3E SM0603  C10 10µ {Lib=C}
@@ -545,11 +535,11 @@
   (    2 GND )
  )
  ( /4F4089D9 SM0402  R4 2k {Lib=R}
-  (    1 N-000112 )
+  (    1 N-000111 )
   (    2 GND )
  )
  ( /4F40812E SMA_JACK_END  SMA1 SMA_JACK {Lib=SMA_JACK}
-  (    1 N-000014 )
+  (    1 N-000013 )
   (    2 GND )
   (    3 GND )
   (    4 GND )
@@ -561,7 +551,7 @@
   (    3 3V3 )
   (    4 USART1_RX )
   (    5 USART1_TX )
-  (    6 N-000082 )
+  (    6 N-000079 )
  )
  ( /4F407FAD BLOCK-3.5mm-2  P3 BATT {Lib=CONN_2}
   (    1 GND )
@@ -573,32 +563,32 @@
  )
  ( /4F407EFC TSSOP24  IC7 ADF7012 {Lib=ADF7012}
   (    1 3V3 )
-  (    2 N-000081 )
-  (    3 N-000139 )
+  (    2 N-000078 )
+  (    3 N-000015 )
   (    4 N-000126 )
-  (    5 N-000140 )
-  (    6 N-000008 )
+  (    5 N-000077 )
+  (    6 N-000001 )
   (    7 GND )
-  (    8 N-000005 )
-  (    9 N-000004 )
-  (   10 N-000080 )
-  (   11 N-000133 )
-  (   12 N-000067 )
-  (   13 N-000132 )
-  (   14 N-000068 )
-  (   15 N-000086 )
-  (   16 N-000085 )
+  (    8 N-000006 )
+  (    9 N-000005 )
+  (   10 N-000076 )
+  (   11 N-000004 )
+  (   12 N-000085 )
+  (   13 N-000137 )
+  (   14 N-000118 )
+  (   15 N-000083 )
+  (   16 N-000082 )
   (   17 N-000018 )
-  (   18 N-000135 )
+  (   18 N-000133 )
   (   19 GND )
-  (   20 N-000115 )
+  (   20 N-000114 )
   (   21 3V3 )
   (   22 GND )
-  (   23 N-000087 )
-  (   24 N-000012 )
+  (   23 N-000084 )
+  (   24 N-000017 )
  )
  ( /4F407ED5 SOT-666  D1 USBLC6-2 {Lib=USBLC6-2}
-  (    1 N-000084 )
+  (    1 N-000081 )
   (    2 GND )
   (    3 N-000098 )
   (    4 GPS_DP )
@@ -613,13 +603,13 @@
   (    5 VBUS_3v3 )
  )
  ( /4F407EC0 TPS61201  IC2 TPS61201 {Lib=TPS61201}
-  (    1 N-000114 )
+  (    1 N-000113 )
   (    2 3V3 )
-  (    3 N-000074 )
+  (    3 N-000070 )
   (    4 GND )
   (    5 VIN )
   (    6 VIN )
-  (    7 N-000127 )
+  (    7 N-000123 )
   (    8 VIN )
   (    9 GND )
   (   10 3V3 )
@@ -638,13 +628,13 @@
   (    2 ? )
   (    3 ? )
   (    4 ? )
-  (    5 N-000071 )
-  (    6 N-000079 )
+  (    5 N-000068 )
+  (    6 N-000067 )
   (    7 NRST )
-  (    8 N-000078 )
-  (    9 N-000077 )
-  (   10 N-000076 )
-  (   11 N-000075 )
+  (    8 N-000075 )
+  (    9 N-000074 )
+  (   10 N-000073 )
+  (   11 N-000071 )
   (   12 GND )
   (   13 3V3 )
   (   14 ? )
@@ -664,7 +654,7 @@
   (   28 N-000101 )
   (   29 ADF_CLKOUT )
   (   30 ADF_CE )
-  (   31 N-000011 )
+  (   31 N-000007 )
   (   32 3V3 )
   (   33 ADF_LE )
   (   34 ADF_TXCLK )
@@ -680,16 +670,16 @@
   (   44 N-000097 )
   (   45 N-000096 )
   (   46 JTMS )
-  (   47 N-000138 )
+  (   47 N-000062 )
   (   48 3V3 )
   (   49 JTCK )
   (   50 JTDI )
   (   51 STM_USB_V )
-  (   52 N-000107 )
+  (   52 N-000011 )
   (   53 ? )
   (   54 ? )
   (   55 JTDO )
-  (   56 JNTRST )
+  (   56 ? )
   (   57 N-000102 )
   (   58 TMP_SCL )
   (   59 TMP_SDA )
@@ -701,7 +691,7 @@
  )
  ( /4F407EA4 MICROUSB  USB1 MICROUSB {Lib=MICROUSB}
   (    1 VBUS )
-  (    2 N-000084 )
+  (    2 N-000081 )
   (    3 N-000098 )
   (    4 ? )
   (    5 GND )
@@ -715,7 +705,7 @@
   (    2 GND )
   (    3 VIN )
   (    4 VBUS )
-  (    5 N-000112 )
+  (    5 N-000111 )
  )
  ( /4F407E77 2032HOLDER  BATT1 COINCELL {Lib=COINCELL}
   (    1 VBATT )
@@ -726,21 +716,21 @@
   (    2 ? )
   (    3 ? )
   (    4 ? )
-  (    5 N-000089 )
-  (    6 N-000109 )
+  (    5 N-000087 )
+  (    6 N-000108 )
   (    7 VBUS_3v3 )
-  (    8 N-000088 )
-  (    9 N-000088 )
+  (    8 N-000086 )
+  (    9 N-000086 )
   (   10 GND )
-  (   11 N-000092 )
+  (   11 N-000090 )
   (   12 GND )
   (   13 GND )
   (   14 GND )
   (   15 ? )
   (   16 ? )
   (   17 ? )
-  (   18 N-000093 )
-  (   19 N-000111 )
+  (   18 N-000091 )
+  (   19 N-000110 )
   (   20 GPS_TX )
   (   21 GPS_RX )
   (   22 VBATT )
@@ -755,18 +745,18 @@
   (    5 2v7 )
  )
  ( /4F407DF5 ALM-1712  U2 ALM-1712 {Lib=ALM-1712}
-  (    1 N-000090 )
+  (    1 N-000088 )
   (    2 GND )
   (    3 GND )
-  (    5 N-000113 )
-  (    8 N-000092 )
-  (   11 N-000091 )
+  (    5 N-000112 )
+  (    8 N-000090 )
+  (   11 N-000089 )
   (   12 GND )
   (  PAD GND )
  )
  ( /4F407DE4 SL1200  ANT1 SL1200 {Lib=SL1200}
   (    1 GND )
-  (    2 N-000090 )
+  (    2 N-000088 )
   (    3 GND )
  )
 )
@@ -1321,22 +1311,26 @@ $endlist
 $endfootprintlist
 }
 { Pin List by Nets
-Net 1 "ADF_LE" "ADF_LE"
- IC8 33
- R33 2
-Net 2 "GND" "GND"
- C12 2
- C7 1
- C4 2
- C14 2
- C15 2
- C10 2
- SMA1 3
- SMA1 2
+Net 1 "" ""
+ R28 2
+ IC7 6
+Net 2 "ADF_CE" "ADF_CE"
+ IC8 30
+ R31 2
+Net 3 "GND" "GND"
  C16 2
  C17 2
- IC1 2
- ANT1 3
+ C12 2
+ C8 2
+ C9 2
+ C10 2
+ P24 1
+ SMA1 5
+ SMA1 4
+ SMA1 3
+ SMA1 2
+ C15 2
+ C14 2
  ANT1 1
  U2 PAD
  U2 12
@@ -1346,6 +1340,7 @@ Net 2 "GND" "GND"
  U1 24
  U1 14
  IC8 63
+ IC1 2
  USB1 5
  IC8 18
  C13 2
@@ -1360,9 +1355,6 @@ Net 2 "GND" "GND"
  P1 1
  P3 1
  P24 2
- P24 1
- SMA1 5
- SMA1 4
  IC4 3
  IC4 2
  D1 2
@@ -1372,6 +1364,8 @@ Net 2 "GND" "GND"
  U1 12
  U1 10
  BATT1 2
+ ANT1 3
+ R2 2
  IC3 7
  IC3 4
  IC3 3
@@ -1379,476 +1373,462 @@ Net 2 "GND" "GND"
  IC3 1
  R4 2
  C5 2
- C8 2
- C9 2
+ C4 2
+ C7 1
  C6 2
  USB2 5
  D2 2
- R2 2
- P26 4
+ P26 9
+ P26 5
+ P26 3
+ R8 2
  R41 1
- P26 18
- P26 16
- P26 14
- P26 12
- P26 20
- P26 10
- P26 8
- P26 6
  D6 2
  C3 1
  C11 1
- R8 2
  X1 2
  R17 1
  C19 2
  C18 2
- D5 2
- Q1 2
- C30 2
- C34 1
- C29 1
  C44 1
- C45 1
- C48 1
- R16 2
- C24 2
- C23 2
- C38 2
- C37 2
- C36 2
- C46 1
- D4 2
- R24 1
- C32 2
- C47 1
- C41 2
- SW1 2
- C26 2
- C25 2
- R37 1
- C35 1
- C43 1
- C40 1
- R20 2
- SJ1 2
- SJ2 2
- D3 2
- R26 1
- C20 2
- C27 2
  C39 2
+ R20 2
+ C2 1
+ C27 2
  C28 2
  C21 2
  C22 2
- C2 1
-Net 3 "ADF_CLKOUT" "ADF_CLKOUT"
- R35 2
- IC8 29
+ C37 2
+ R26 1
+ C46 1
+ C47 1
+ C48 1
+ C45 1
+ C36 2
+ C41 2
+ D3 2
+ D4 2
+ D5 2
+ R16 2
+ R37 1
+ SW1 2
+ SJ2 2
+ SJ1 2
+ C30 2
+ R24 1
+ C32 2
+ C35 1
+ C23 2
+ Q1 2
+ C29 2
+ C34 2
+ C40 1
+ C43 1
+ C38 2
+ C24 2
+ C20 2
+ C25 2
+ C26 2
 Net 4 "" ""
- X2 2
- C43 2
- IC7 9
+ R36 1
+ IC7 11
 Net 5 "" ""
- IC7 8
+ X2 2
+ IC7 9
+ C43 2
+Net 6 "" ""
  C40 2
  X2 1
-Net 6 "ADF_TXDATA" "ADF_TXDATA"
- IC8 36
- R25 1
-Net 7 "ADF_TXCLK" "ADF_TXCLK"
- R27 1
- IC8 34
-Net 8 "" ""
- IC7 6
- R28 2
-Net 9 "ADF_CE" "ADF_CE"
- R31 2
- IC8 30
-Net 10 "TMP_SDA" "TMP_SDA"
- R14 1
- IC6 6
- P11 1
- IC8 59
-Net 11 "" ""
+ IC7 8
+Net 7 "" ""
  SJ1 1
  IC8 31
  C37 1
-Net 12 "" ""
- C35 2
- C33 2
- IC7 24
-Net 13 "STM_USB_V" "STM_USB_V"
- R15 1
- R20 1
- IC8 51
-Net 14 "" ""
- C23 1
- L5 2
- SMA1 1
-Net 15 "" ""
- C31 2
- R24 2
-Net 16 "ADF_DATA" "ADF_DATA"
- IC8 23
- R38 2
-Net 17 "ADF_CLK" "ADF_CLK"
- IC8 21
- R36 2
-Net 18 "" ""
- C33 1
- IC7 17
-Net 19 "" ""
- C42 1
- L9 1
-Net 20 "" ""
- R30 2
- D4 1
-Net 21 "" ""
- R32 2
- D5 1
-Net 30 "BOOT0" "BOOT0"
- IC8 60
- R37 2
- SW2 1
- R42 2
-Net 31 "NRST" "NRST"
- P25 1
- P26 15
- IC8 7
- C49 1
- SW1 1
-Net 32 "" ""
- R29 2
- D3 1
-Net 62 "" ""
- Q1 3
- P13 2
- R13 1
-Net 63 "" ""
- C19 1
- R9 1
- C18 1
- P13 1
-Net 64 "PYRO_FIRE" "PYRO_FIRE"
- P10 1
- R11 2
- IC8 38
-Net 65 "TMP_SCL" "TMP_SCL"
- P12 1
- IC8 58
- IC6 1
- R10 1
-Net 66 "ADF_MUXOUT" "ADF_MUXOUT"
- R28 1
- IC8 62
- P16 1
-Net 67 "" ""
- P19 1
- IC7 12
- R35 1
-Net 68 "" ""
- P18 1
- R31 1
- IC7 14
-Net 69 "STM_DM" "STM_DM"
- D2 6
- R39 1
-Net 70 "STM_DP" "STM_DP"
- D2 4
- R40 1
- R22 2
-Net 71 "" ""
- X1 3
- IC8 5
-Net 72 "VBATT" "VBATT"
- BATT1 1
- U1 22
- IC8 1
-Net 73 "3V3" "3V3"
- IC5 1
- IC5 3
- C48 2
- P24 3
+Net 8 "3V3" "3V3"
+ IC8 13
+ IC2 2
+ L6 2
+ SW2 2
  P4 1
+ IC8 32
+ C9 1
+ C10 1
+ IC6 5
+ C16 1
+ IC3 8
+ IC2 10
+ R10 2
+ IC5 3
+ IC5 1
+ P24 3
+ C46 2
+ C47 2
+ C48 2
+ IC8 64
  C45 2
  C44 2
  IC7 1
- L6 2
- IC8 13
- C46 2
- IC8 32
- C47 2
- U1 23
- IC7 21
- SW2 2
- C2 2
- C27 1
- C20 1
- C28 1
- C21 1
- IC6 5
- C22 1
- C1 2
- C13 1
- C10 1
- C9 1
- C16 1
- IC3 8
- C24 1
- C25 1
  C26 1
+ C27 1
+ C25 1
+ C28 1
+ U1 23
+ C21 1
+ C24 1
+ C22 1
  P26 1
- P26 2
- IC8 64
  R14 2
- R10 2
- IC2 2
+ IC7 21
+ C13 1
+ C1 2
+ C20 1
+ C2 2
  IC8 48
  IC8 19
- IC2 10
-Net 74 "" ""
+Net 9 "TMP_SDA" "TMP_SDA"
+ R14 1
+ IC6 6
+ IC8 59
+ P11 1
+Net 10 "STM_DP" "STM_DP"
+ D2 4
+ R22 2
+ R40 1
+Net 11 "" ""
+ R22 1
+ IC8 52
+Net 12 "STM_USB_V" "STM_USB_V"
+ R15 1
+ IC8 51
+ R20 1
+Net 13 "" ""
+ L5 2
+ SMA1 1
+ C23 1
+Net 14 "" ""
+ C42 1
+ L9 1
+Net 15 "" ""
+ R23 2
+ C31 1
+ C30 1
+ IC7 3
+Net 16 "" ""
+ C31 2
+ R24 2
+Net 17 "" ""
+ C35 2
+ C33 2
+ IC7 24
+Net 18 "" ""
+ IC7 17
+ C33 1
+Net 19 "" ""
+ D3 1
+ R29 2
+Net 20 "" ""
+ D4 1
+ R30 2
+Net 21 "" ""
+ D5 1
+ R32 2
+Net 23 "PYRO_FIRE" "PYRO_FIRE"
+ R11 2
+ P10 1
+ IC8 38
+Net 24 "BOOT0" "BOOT0"
+ SW2 1
+ R37 2
+ IC8 60
+ R42 2
+Net 25 "NRST" "NRST"
+ IC8 7
+ C49 1
+ P26 10
+ P25 1
+ SW1 1
+Net 62 "" ""
+ C38 1
+ SJ2 1
+ IC8 47
+Net 63 "STM_DM" "STM_DM"
+ R39 1
+ D2 6
+Net 64 "" ""
+ P13 2
+ Q1 3
+ R13 1
+Net 65 "ADF_MUXOUT" "ADF_MUXOUT"
+ P16 1
+ R28 1
+ IC8 62
+Net 66 "ADF_CLKOUT" "ADF_CLKOUT"
+ IC8 29
+ P19 1
+ R35 2
+Net 67 "" ""
+ IC8 6
+ X1 1
+Net 68 "" ""
+ X1 3
+ IC8 5
+Net 69 "VBATT" "VBATT"
+ BATT1 1
+ U1 22
+ IC8 1
+Net 70 "" ""
  IC2 3
  L1 1
-Net 75 "" ""
+Net 71 "" ""
  IC8 11
  R34 1
-Net 76 "" ""
- IC8 10
+Net 72 "JTDI" "JTDI"
+ P26 8
+ IC8 50
+Net 73 "" ""
  R32 1
-Net 77 "" ""
+ IC8 10
+Net 74 "" ""
  IC8 9
  R30 1
-Net 78 "" ""
- R29 1
+Net 75 "" ""
  IC8 8
-Net 79 "" ""
- X1 1
- IC8 6
-Net 80 "" ""
- P21 1
+ R29 1
+Net 76 "" ""
  R38 1
  IC7 10
-Net 81 "" ""
- IC7 2
+Net 77 "" ""
+ R27 2
+ IC7 5
+Net 78 "" ""
  C39 1
-Net 82 "" ""
+ IC7 2
+Net 79 "" ""
  C49 2
  P24 6
-Net 83 "USART1_TX" "USART1_TX"
+Net 80 "USART1_TX" "USART1_TX"
  P23 1
- IC8 42
  P24 5
-Net 84 "" ""
+ IC8 42
+Net 81 "" ""
  USB1 2
  D1 1
-Net 85 "" ""
- L8 2
+Net 82 "" ""
  IC7 16
-Net 86 "" ""
- L8 1
+ L8 2
+Net 83 "" ""
  IC7 15
-Net 87 "" ""
- R26 2
+ L8 1
+Net 84 "" ""
  IC7 23
-Net 88 "" ""
+ R26 2
+Net 85 "" ""
+ R35 1
+ IC7 12
+Net 86 "" ""
  U1 8
  U1 9
-Net 89 "" ""
+Net 87 "" ""
  U1 5
  R6 1
-Net 90 "" ""
- U2 1
+Net 88 "" ""
  ANT1 2
-Net 91 "" ""
+ U2 1
+Net 89 "" ""
  C7 2
- L3 2
- U2 11
  R5 1
-Net 92 "" ""
- U1 11
+ U2 11
+ L3 2
+Net 90 "" ""
  U2 8
-Net 93 "" ""
+ U1 11
+Net 91 "" ""
  IC3 5
  U1 18
-Net 94 "GPS_TX" "GPS_TX"
- U1 20
+Net 92 "GPS_TX" "GPS_TX"
  IC8 17
+ U1 20
  P5 1
+Net 94 "JTMS" "JTMS"
+ P26 2
+ IC8 46
 Net 95 "GPS_RX" "GPS_RX"
- IC8 16
  U1 21
  P6 1
+ IC8 16
 Net 96 "" ""
  R40 2
  IC8 45
 Net 97 "" ""
- R39 2
  IC8 44
+ R39 2
 Net 98 "" ""
- D1 3
  USB1 3
+ D1 3
 Net 99 "VBUS" "VBUS"
- USB1 1
  C14 1
- R15 2
  C11 2
  USB2 1
  D2 5
- D1 5
- IC4 1
- IC1 4
  P8 1
+ IC1 4
+ IC4 1
+ R15 2
+ D1 5
+ USB1 1
 Net 100 "CHG_STAT" "CHG_STAT"
- IC1 1
- IC8 39
  P2 1
+ IC8 39
+ IC1 1
 Net 101 "" ""
- IC8 28
  R41 2
+ IC8 28
 Net 102 "" ""
  R42 1
  IC8 57
 Net 103 "VBUS_3v3" "VBUS_3v3"
- U1 7
  IC4 5
+ U1 7
  P7 1
  R2 1
  C15 1
 Net 104 "2v7" "2v7"
  IC5 5
  L2 2
- R1 2
  P9 1
- C17 1
  C4 1
+ C17 1
+ R1 2
 Net 105 "" ""
  D2 3
  USB2 3
 Net 106 "" ""
- D2 1
  USB2 2
-Net 107 "" ""
- R22 1
- IC8 52
-Net 108 "GPS_DP" "GPS_DP"
+ D2 1
+Net 107 "GPS_DP" "GPS_DP"
  D1 4
  R3 2
-Net 109 "" ""
- U1 6
+Net 108 "" ""
  R3 1
-Net 110 "GPS_DM" "GPS_DM"
- R6 2
+ U1 6
+Net 109 "GPS_DM" "GPS_DM"
  D1 6
-Net 111 "" ""
- IC3 6
+ R6 2
+Net 110 "" ""
  U1 19
-Net 112 "" ""
- R4 1
+ IC3 6
+Net 111 "" ""
  IC1 5
-Net 113 "" ""
+ R4 1
+Net 112 "" ""
  R5 2
  U2 5
-Net 114 "" ""
+Net 113 "" ""
  C12 1
  IC2 1
-Net 115 "" ""
+Net 114 "" ""
  L6 1
- IC7 20
  L9 2
-Net 116 "" ""
+ IC7 20
+Net 115 "" ""
  L3 1
- C6 1
  L2 1
  R1 1
-Net 117 "" ""
- L4 1
+ C6 1
+Net 116 "" ""
  R9 2
-Net 118 "PYRO_TEST" "PYRO_TEST"
+ L4 1
+Net 117 "PYRO_TEST" "PYRO_TEST"
  IC8 37
  R13 2
  R17 2
-Net 119 "JNTRST" "JNTRST"
- IC8 56
- P26 3
-Net 120 "JTMS" "JTMS"
- P26 7
- IC8 46
-Net 121 "JTDO" "JTDO"
+Net 118 "" ""
+ IC7 14
+ R31 1
+ P18 1
+Net 119 "ADF_DATA" "ADF_DATA"
+ R38 2
+ P21 1
+ IC8 23
+Net 120 "JTDO" "JTDO"
  IC8 55
- P26 13
-Net 125 "" ""
+ P26 6
+Net 121 "" ""
  D6 1
  R34 2
-Net 126 "" ""
- R25 2
- C34 2
- P15 1
- IC7 4
-Net 127 "" ""
+Net 122 "TMP_SCL" "TMP_SCL"
+ IC8 58
+ IC6 1
+ P12 1
+ R10 1
+Net 123 "" ""
  R8 1
  IC2 7
  R7 1
-Net 128 "" ""
- R16 1
- Q1 1
- R11 1
-Net 129 "JTCK" "JTCK"
+Net 124 "JTCK" "JTCK"
  IC8 49
- P26 9
-Net 130 "JTDI" "JTDI"
- IC8 50
- P26 5
-Net 131 "USART1_RX" "USART1_RX"
- P24 4
- P22 1
- IC8 43
-Net 132 "" ""
- P17 1
- R33 1
- IC7 13
-Net 133 "" ""
+ P26 4
+Net 125 "ADF_TXDATA" "ADF_TXDATA"
+ C29 1
+ IC8 36
+ R25 1
+ P15 1
+Net 126 "" ""
+ IC7 4
+ R25 2
+Net 127 "ADF_TXCLK" "ADF_TXCLK"
+ IC8 34
+ P14 1
+ C34 1
+ R27 1
+Net 128 "ADF_CLK" "ADF_CLK"
+ R36 2
+ IC8 21
  P20 1
- IC7 11
- R36 1
-Net 134 "VIN" "VIN"
- IC1 3
+Net 129 "VIN" "VIN"
+ L1 2
  IC2 8
  IC2 6
  IC2 5
- C8 1
- C5 1
  L4 2
+ C5 1
  P1 2
- C3 2
  P3 2
+ C8 1
+ C3 2
+ IC1 3
  R7 2
- L1 2
-Net 135 "" ""
- IC7 18
+Net 130 "" ""
+ R11 1
+ R16 1
+ Q1 1
+Net 131 "" ""
+ C18 1
+ C19 1
+ P13 1
+ R9 1
+Net 133 "" ""
  C32 1
  R23 1
-Net 136 "" ""
- L7 2
+ IC7 18
+Net 134 "" ""
  L5 1
+ L7 2
  C36 1
-Net 137 "" ""
- C42 2
+Net 135 "" ""
  C41 1
+ C42 2
  L7 1
-Net 138 "" ""
- IC8 47
- SJ2 1
- C38 1
-Net 139 "" ""
- C30 1
- C31 1
- R23 2
- IC7 3
-Net 140 "" ""
- P14 1
- C29 2
- R27 2
- IC7 5
+Net 136 "USART1_RX" "USART1_RX"
+ IC8 43
+ P24 4
+ P22 1
+Net 137 "" ""
+ P17 1
+ IC7 13
+ R33 1
+Net 138 "ADF_LE" "ADF_LE"
+ IC8 33
+ R33 2
 }
 #End
