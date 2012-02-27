@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 27 Feb 2012 00:55:35 GMT
+EESchema Schematic File Version 2  date Mon 27 Feb 2012 04:27:24 GMT
 LIBS:mosfet_n
 LIBS:npn
 LIBS:power
@@ -40,6 +40,8 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+NoConn ~ 2250 4000
+NoConn ~ 3700 4600
 Wire Wire Line
 	3700 5700 3800 5700
 Wire Wire Line
