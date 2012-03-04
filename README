@@ -1,6 +1,6 @@
-Balloon Flight Computer
+WOMBAT Balloon Flight Computer
+==============================
 
-Adam Greig
-Jon Sowman
 
-Copyright 2011 CU Spaceflight
+Wombat is a flight computer by Cambridge University Spaceflight featuring
+onboard STM32F4, uBlox 6 GPS and ADF7012 radio.
