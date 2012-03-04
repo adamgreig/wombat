@@ -4,3 +4,4 @@
 *.elf
 *.list
 *.srec
+*.bin
