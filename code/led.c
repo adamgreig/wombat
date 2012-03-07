@@ -35,4 +35,13 @@ void led_dance() {
     led_wait();
     GPIOC_ODR = GPIO3;
     led_wait();
+    GPIOC_ODR = 0;
+}
+
+void led_turn_on(u8 led) {
+    gpio_set(GPIOC, 1<<led);
+}
+
+void led_turn_off(u8 led) {
+    gpio_clear(GPIOC, 1<<led);
 }

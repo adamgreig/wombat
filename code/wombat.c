@@ -15,15 +15,18 @@ void clock_setup(void) {
 
 void hard_fault_handler(void);
 
+char STRING[28] = "WOMBAT REPORTING FOR DUTY\n";
+
 int main(void) {
     clock_setup();
-    /*adf_peripheral_setup();*/
-    /*adf_default_config();*/
     led_peripheral_setup();
+    adf_peripheral_setup();
+    adf_default_config();
+
+    /*led_dance();*/
 
     while(1) {
-        /*adf_transmit_string(STRING, 27);*/
-        led_dance();
+        adf_transmit_string(STRING, 27);
     }
 
     return 0;
