@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 27 Feb 2012 04:27:24 GMT
+EESchema Schematic File Version 2  date Thu 08 Mar 2012 04:22:06 GMT
 LIBS:mosfet_n
 LIBS:npn
 LIBS:power
@@ -25,14 +25,13 @@ LIBS:24aa32a
 LIBS:sj
 LIBS:resonator
 LIBS:microsd
-LIBS:wombat-cache
 EELAYER 25  0
 EELAYER END
 $Descr A4 11700 8267
 encoding utf-8
 Sheet 1 1
 Title "Wombat Flight Computer"
-Date "27 feb 2012"
+Date "8 mar 2012"
 Rev "1"
 Comp "CU Spaceflight"
 Comment1 "Drawn by Adam Greig"
@@ -40,8 +39,8 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-NoConn ~ 2250 4000
-NoConn ~ 3700 4600
+Wire Wire Line
+	8250 4800 8350 4800
 Wire Wire Line
 	3700 5700 3800 5700
 Wire Wire Line
@@ -442,10 +441,6 @@ Wire Wire Line
 	7050 5750 7300 5750
 Wire Wire Line
 	8500 4750 8500 4800
-Wire Wire Line
-	7800 4800 7750 4800
-Wire Wire Line
-	7750 4800 7750 4750
 Connection ~ 7450 4300
 Wire Wire Line
 	7450 4300 7450 4350
@@ -959,8 +954,6 @@ Connection ~ 7750 4300
 Wire Wire Line
 	7450 4750 7450 4800
 Wire Wire Line
-	8300 4800 8350 4800
-Wire Wire Line
 	9400 4600 9650 4600
 Wire Wire Line
 	9650 4600 9650 5750
@@ -1374,6 +1367,12 @@ Wire Wire Line
 	2200 6750 2200 6850
 Wire Wire Line
 	2200 6850 2250 6850
+Wire Wire Line
+	7750 4850 7850 4850
+Wire Wire Line
+	7850 4850 7850 4800
+NoConn ~ 2250 4000
+NoConn ~ 3700 4600
 Text GLabel 2150 6750 0    50   Output ~ 0
 SD_CD
 $Comp
@@ -2897,7 +2896,7 @@ F 4 "1740589" H 5100 3450 60  0001 C CNN "Farnell"
 $EndComp
 Text Notes 4250 1650 0    60   ~ 0
 Boot Config:\nSelf Powered
-Text Notes 8000 4550 0    60   ~ 0
+Text Notes 8000 4500 0    60   ~ 0
  CP\nFilter
 Text Notes 10750 5400 0    60   ~ 0
 Output\nFilter
@@ -3121,53 +3120,53 @@ L C C32
 U 1 1 4F410DC6
 P 8500 4550
 F 0 "C32" H 8550 4650 50  0000 L CNN
-F 1 "270p" H 8550 4450 50  0000 L CNN
+F 1 "820p" H 8550 4450 50  0000 L CNN
 F 2 "SM0402" H 8500 4550 60  0001 C CNN
-F 4 "1414585" H 8500 4550 60  0001 C CNN "Farnell"
+F 4 "1800801" H 8500 4550 60  0001 C CNN "Farnell"
 	1    8500 4550
 	1    0    0    -1  
 $EndComp
 $Comp
 L R R24
 U 1 1 4F410DC0
-P 8050 4800
-F 0 "R24" V 8130 4800 50  0000 C CNN
-F 1 "910" V 8050 4800 50  0000 C CNN
-F 2 "SM0402" H 8050 4800 60  0001 C CNN
-F 4 "1458832" H 8050 4800 60  0001 C CNN "Farnell"
-	1    8050 4800
-	0    1    1    0   
+P 7750 4600
+F 0 "R24" V 7830 4600 50  0000 C CNN
+F 1 "620" V 7750 4600 50  0000 C CNN
+F 2 "SM0402" H 7750 4600 60  0001 C CNN
+F 4 "1768778" H 7750 4600 60  0001 C CNN "Farnell"
+	1    7750 4600
+	1    0    0    -1  
 $EndComp
 $Comp
 L R R23
 U 1 1 4F410DBA
 P 8100 4300
 F 0 "R23" V 8180 4300 50  0000 C CNN
-F 1 "3k3" V 8100 4300 50  0000 C CNN
+F 1 "1k3" V 8100 4300 50  0000 C CNN
 F 2 "SM0402" H 8100 4300 60  0001 C CNN
-F 4 "1738856" H 8100 4300 60  0001 C CNN "Farnell"
+F 4 "1768787" H 8100 4300 60  0001 C CNN "Farnell"
 	1    8100 4300
 	0    1    1    0   
 $EndComp
 $Comp
 L C C31
 U 1 1 4F410DB6
-P 7750 4550
-F 0 "C31" H 7800 4650 50  0000 L CNN
-F 1 "12n" H 7800 4450 50  0000 L CNN
-F 2 "SM0402" H 7750 4550 60  0001 C CNN
-F 4 "1865461" H 7750 4550 60  0001 C CNN "Farnell"
-	1    7750 4550
-	1    0    0    -1  
+P 8050 4800
+F 0 "C31" H 8100 4900 50  0000 L CNN
+F 1 "22n" H 8100 4700 50  0000 L CNN
+F 2 "SM0402" H 8050 4800 60  0001 C CNN
+F 4 "1414583" H 8050 4800 60  0001 C CNN "Farnell"
+	1    8050 4800
+	0    -1   -1   0   
 $EndComp
 $Comp
 L C C30
 U 1 1 4F410DAF
 P 7450 4550
 F 0 "C30" H 7500 4650 50  0000 L CNN
-F 1 "680p" H 7500 4450 50  0000 L CNN
+F 1 "1.8n" H 7500 4450 50  0000 L CNN
 F 2 "SM0402" H 7450 4550 60  0001 C CNN
-F 4 "1865453" H 7450 4550 60  0001 C CNN "Farnell"
+F 4 "1800793" H 7450 4550 60  0001 C CNN "Farnell"
 	1    7450 4550
 	1    0    0    -1  
 $EndComp
