@@ -3,30 +3,47 @@
 #include <libopencm3/stm32/f4/rcc.h>
 #include <libopencm3/stm32/f4/gpio.h>
 
+#include <stdio.h>
+
 #include "adf7012.h"
 #include "led.h"
-
-void clock_setup(void) {
-    rcc_clock_setup_hse_3v3(&hse_8mhz_3v3[CLOCK_3V3_120MHZ]);
-    rcc_peripheral_enable_clock(&RCC_AHB1ENR, RCC_AHB1ENR_IOPAEN);
-    rcc_peripheral_enable_clock(&RCC_AHB1ENR, RCC_AHB1ENR_IOPBEN);
-    rcc_peripheral_enable_clock(&RCC_AHB1ENR, RCC_AHB1ENR_IOPCEN);
-}
+#include "clock.h"
+#include "usart.h"
+#include "gps.h"
 
 void hard_fault_handler(void);
 
-char STRING[28] = "WOMBAT REPORTING FOR DUTY\n";
+char buffer[128];
 
 int main(void) {
+    int i = 0;
     clock_setup();
     led_peripheral_setup();
     adf_peripheral_setup();
     adf_default_config();
+    usart_peripheral_setup();
+    gps_peripheral_setup();
 
-    /*led_dance();*/
-
+    printf("Activating GPS passthrough...\n");
     while(1) {
-        adf_transmit_string(STRING, 27);
+        /*adf_transmit_string(STRING, 27);*/
+        u8 b = gps_read_byte();
+        printf("%c", b);
+        buffer[i] = b;
+        if(i == 125) {
+            i = 0;
+        } else if(b == '$') {
+            i = 1;
+            buffer[0] = '$';
+        } else if(buffer[i-2] == '*') {
+            buffer[i+1] = '\n';
+            buffer[i+2] = 0x00;
+            printf("\r\n\r\nTransmitting current buffer: %s\r\n\r\n", buffer);
+            adf_transmit_string(buffer, i+2);
+            i = 0;
+        } else {
+            i++;
+        }
     }
 
     return 0;

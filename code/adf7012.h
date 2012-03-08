@@ -14,8 +14,8 @@ void adf_transmit_string(char* data, uint32_t length);
  * Timing
  */
 #define ADF_1_MS        (u32)(24740)
-#define ADF_50_BAUD     (u32)(494784)
-#define ADF_300_BAUD    (u32)(82472)
+#define ADF_50_BAUD     (u32)(4794412)
+#define ADF_300_BAUD    (u32)(79915)
 
 /*
  * ADF7012 Pins

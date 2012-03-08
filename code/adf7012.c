@@ -61,7 +61,7 @@ void adf_default_config() {
 
     /* Register 1 -- N set to 88.28125 */
     u8  n = 88;
-    u16 m = 600;
+    u16 m = 500;
     adf_write_reg(
         1*ADF_C1  | 0*ADF_C2  |
         n << 14 |
@@ -267,7 +267,7 @@ void adf_transmit_byte(u8 byte) {
 
     /* START */
     adf_transmit_bit(0);
-    adf_wait(ADF_50_BAUD);
+    adf_wait(ADF_300_BAUD);
 
     /* DATA */
     for(i=0; i<8; i++) {
@@ -275,13 +275,13 @@ void adf_transmit_byte(u8 byte) {
             adf_transmit_bit(1);
         else
             adf_transmit_bit(0);
-        adf_wait(ADF_50_BAUD);
+        adf_wait(ADF_300_BAUD);
     }
 
     /* STOP */
     adf_transmit_bit(1);
-    adf_wait(ADF_50_BAUD);
-    adf_wait(ADF_50_BAUD);
+    adf_wait(ADF_300_BAUD);
+    adf_wait(ADF_300_BAUD);
 
     if(gpio_get(ADF_MUXOUT_PORT, ADF_MUXOUT)) {
         led_turn_off(1);
