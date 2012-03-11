@@ -5,10 +5,17 @@
 void adf_peripheral_setup(void);
 void adf_default_config(void);
 void adf_reset(void);
+u8 adf_locked(void);
+void adf_basic_config(void);
+void adf_set_freq(uint32_t khz);
+void adf_set_r(u8 r);
+void adf_set_n_m(u8 n, u16 m);
 void adf_wait_for_lock(void);
 void adf_write_reg(uint32_t data);
 void adf_transmit_byte(uint8_t byte);
 void adf_transmit_string(char* data, uint32_t length);
+
+void adf_wait_ms(u16 ms);
 
 /*
  * Timing
@@ -184,7 +191,7 @@ void adf_transmit_string(char* data, uint32_t length);
 #define ADF_R3_CP4      (1<<9)
 
 /* VCO Disable */
-#define ADF_R3_VD0      (1<<10)
+#define ADF_R3_VD1      (1<<10)
 
 /* MUXOUT */
 #define ADF_R3_M1       (1<<11)

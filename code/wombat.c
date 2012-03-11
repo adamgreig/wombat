@@ -5,60 +5,50 @@
 
 #include <stdio.h>
 
-#include "adf7012.h"
+#include "adf.h"
 #include "led.h"
 #include "clock.h"
 #include "usart.h"
 #include "gps.h"
-
-void hard_fault_handler(void);
+#include "delay.h"
 
 char buffer[128];
 
 int main(void) {
-    int i = 0;
     clock_setup();
     led_peripheral_setup();
     adf_peripheral_setup();
-    adf_default_config();
     usart_peripheral_setup();
     gps_peripheral_setup();
+    
+    adf_reset_config();
 
-    printf("Activating GPS passthrough...\n");
-    while(1) {
-        /*adf_transmit_string(STRING, 27);*/
-        u8 b = gps_read_byte();
-        printf("%c", b);
-        buffer[i] = b;
-        if(i == 125) {
-            i = 0;
-        } else if(b == '$') {
-            i = 1;
-            buffer[0] = '$';
-        } else if(buffer[i-2] == '*') {
-            buffer[i+1] = '\n';
-            buffer[i+2] = 0x00;
-            printf("\r\n\r\nTransmitting current buffer: %s\r\n\r\n", buffer);
-            adf_transmit_string(buffer, i+2);
-            i = 0;
-        } else {
-            i++;
-        }
-    }
+    printf("Setting to 434.000MHz...\r\n");
+    adf_set_n(176); adf_set_m(2437);
+    adf_set_muxout(ADF_MUXOUT_DIGITAL_LOCK);
+    adf_set_vco_adjust(3);
+    adf_set_vco_bias(9);
+    adf_write_config();
+
+    adf_set_pll_enable(ADF_ON);
+    adf_write_config();
+
+    printf("Waiting for lock...\r\n");
+
+    while(!adf_locked());
+
+    printf("Locked, enabling PA...\r\n");
+    adf_set_pa_enable(ADF_ON);
+    adf_set_pa_level(15);
+    adf_write_config();
+
+    printf("Go time!\r\n");
+
+    char buf[128];
+    sprintf(buf, "UU HELLO WORLD UU\r\n");
+    for(;;)
+        adf_transmit_string(buf, 18, ADF_50_BAUD);
 
     return 0;
 }
 
-void hard_fault_handler(void) {
-    int i;
-    RCC_AHB1ENR     |= (1<<2);
-    GPIOC_MODER      = (1<<0) | (1<<2) | (1<<4) | (1<<6);
-    while(1) {
-        GPIOC_ODR        = (1<<3) | (1<<2) | (1<<1) | (1<<0);
-        for(i=0; i<200000; i++)
-            __asm__("nop");
-        GPIOC_ODR        = 0;
-        for(i=0; i<200000; i++)
-            __asm__("nop");
-    }
-}
