@@ -107,7 +107,7 @@ void adf_reset_config(void) {
     adf_write_config();
 }
 
-void adf_reset_register_zero() {
+void adf_reset_register_zero(void) {
     adf_config.r0.address = 0;
     adf_config.r0.frequency_error_correction = 0;
     adf_config.r0.r_divider = 2;
@@ -118,14 +118,14 @@ void adf_reset_register_zero() {
     adf_config.r0.output_divider = 0;
 }
 
-void adf_reset_register_one() {
+void adf_reset_register_one(void) {
     adf_config.r1.address = 1;
     adf_config.r1.fractional_n = 0;
     adf_config.r1.integer_n = 0;
     adf_config.r1.prescaler = ADF_PRESCALER_4_5;
 }
 
-void adf_reset_register_two() {
+void adf_reset_register_two(void) {
     adf_config.r2.address = 2;
     adf_config.r2.mod_control = ADF_MODULATION_FSK;
     adf_config.r2.gook = ADF_OFF;
@@ -135,7 +135,7 @@ void adf_reset_register_two() {
     adf_config.r2.index_counter = 0;
 }
 
-void adf_reset_register_three() {
+void adf_reset_register_three(void) {
     adf_config.r3.address = 3;
     adf_config.r3.pll_enable = ADF_OFF;
     adf_config.r3.pa_enable = ADF_OFF;
@@ -153,7 +153,7 @@ void adf_reset_register_three() {
     adf_config.r3.sd_test_mode = 0;
 }
 
-void adf_reset() {
+void adf_reset(void) {
     gpio_clear(ADF_CE_PORT, ADF_CE);
     gpio_set(ADF_LE_PORT, ADF_LE);
     gpio_set(ADF_TXDATA_PORT, ADF_TXDATA);
@@ -164,15 +164,19 @@ void adf_reset() {
     delay_ms(100);
 }
 
+void adf_turn_off(void) {
+    gpio_clear(ADF_CE_PORT, ADF_CE);
+}
+
 // Configuration writing functions ---------------------------------------
-void adf_write_config() {
+void adf_write_config(void) {
     adf_write_register_zero();
     adf_write_register_one();
     adf_write_register_two();
     adf_write_register_three();
 }
 
-void adf_write_register_zero() {
+void adf_write_register_zero(void) {
     u32 reg =
         ((adf_config.r0.address & 0x3) << 0) |
         ((adf_config.r0.frequency_error_correction & 0x7FF) << 2) |
@@ -185,7 +189,7 @@ void adf_write_register_zero() {
     adf_write_register(reg);
 }
 
-void adf_write_register_one() {
+void adf_write_register_one(void) {
     u32 reg =
         ((adf_config.r1.address & 0x3) << 0) |
         ((adf_config.r1.fractional_n & 0xFFF) << 2) |
@@ -194,7 +198,7 @@ void adf_write_register_one() {
     adf_write_register(reg);
 }
 
-void adf_write_register_two() {
+void adf_write_register_two(void) {
     u32 reg =
         ((adf_config.r2.address & 0x3) << 0) |
         ((adf_config.r2.mod_control & 0x3) << 2) |
@@ -206,7 +210,7 @@ void adf_write_register_two() {
     adf_write_register(reg);
 }
 
-void adf_write_register_three() {
+void adf_write_register_three(void) {
     u32 reg =
         ((adf_config.r3.address & 0x3) << 0) |
         ((adf_config.r3.pll_enable & 0x1) << 2) |

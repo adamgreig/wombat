@@ -4,6 +4,7 @@
 #include <libopencm3/stm32/f4/gpio.h>
 
 #include <stdio.h>
+#include <string.h>
 
 #include "adf.h"
 #include "led.h"
@@ -12,17 +13,84 @@
 #include "gps.h"
 #include "delay.h"
 
-char buffer[128];
+void radio_start(void) {
+    led_turn_on(0);
+
+    adf_reset_config();
+
+    printf("Setting radio to 434.000MHz...\r\n");
+    u16 m = 2437;
+    adf_set_n(176); adf_set_m(m);
+    adf_set_muxout(ADF_MUXOUT_DIGITAL_LOCK);
+    adf_set_vco_adjust(3);
+    adf_set_vco_bias(9);
+    adf_write_config();
+
+    adf_set_pll_enable(ADF_ON);
+    adf_write_config();
+
+    printf("Waiting for radio lock...\r\n");
+
+    u32 n;
+    while(!adf_locked()) {
+        delay_ms(1);
+        n++;
+        if(n > 1000) {
+            // oh no, 1 second and no lock?
+            led_turn_on(3);
+            m -= 100;
+            if(m < 900) {
+                //meh
+                m = 2437;
+            }
+            adf_set_m(m);
+            adf_write_config();
+            n = 0;
+            led_turn_off(3);
+        }
+    }
+
+    printf("Radio locked, enabling PA...\r\n");
+    adf_set_pa_enable(ADF_ON);
+    adf_set_pa_level(58);
+    adf_write_config();
+
+    printf("Radio ready to go!\r\n");
+
+    led_turn_off(0);
+
+}
+
+u16 crc_update(u16 crc, u8 data) {
+    int i;
+
+    crc = crc ^ ((u16)data << 8);
+    for (i=0; i<8; i++)
+    {
+        if (crc & 0x8000)
+            crc = (crc << 1) ^ 0x1021;
+        else
+            crc <<= 1;
+    }
+
+    return crc;
+}
 
 int main(void) {
     clock_setup();
-    /*led_peripheral_setup();*/
-    /*adf_peripheral_setup();*/
+    led_peripheral_setup();
+    adf_peripheral_setup();
     usart_peripheral_setup();
     gps_peripheral_setup();
 
-    for(;;) {
-        char buf[48];
+    u32 counter;
+    for(counter=0;;counter++) {
+        s32 altitude = 0;
+        double latitude = 0.0, longitude = 0.0;
+        u8 hour = 0, minute = 0, second = 0;
+
+        /*gps_get_position(&lat, &lon, &alt, &hr, &min, &sec);*/
+        char buf[36];
         u8 b, i;
         for(i=0; i<36; i++) {
             b = gps_read_byte();
@@ -67,60 +135,37 @@ int main(void) {
         printf("Got position: time %lu; lon %li; lat %li; alt %li\r\n",
                 time, lon, lat, alt);
 
-        char sentence[256];
-        s32 alt_m = alt / 1000;
-        s32 lon_deg = lon / 10000000;
-        s32 lon_decideg = lon % 10000000;
-        if(lon_decideg < 0)
-            lon_decideg = -lon_decideg;
-        s32 lat_deg = lat / 10000000;
-        s32 lat_decideg = lat % 10000000;
-        if(lat_decideg < 0)
-            lat_decideg = -lat_decideg;
+        altitude = alt / 1000;
+        longitude = (double)lon / 10000000.0;
+        latitude = (double)lat / 10000000.0;
         u8 dow = time / 86400000;
         u32 left = time - dow*86400000;
-        u8 hr = left / 3600000;
-        left -= hr * 3600000;
-        u8 min = left / 60000;
-        left -= min * 60000;
-        u8 sec = left / 1000;
+        hour = left / 3600000;
+        left -= hour * 3600000;
+        minute = left / 60000;
+        left -= minute * 60000;
+        second = left / 1000;
 
-        sprintf(sentence,
-                "$$WOMBAT,n,%02u:%02u:%02u,%li.%li,%li.%li,%li*ABCD\n",
-                hr, min, sec, lat_deg, lat_decideg, lon_deg, lon_decideg,
-                alt_m);
+        char pre_sentence[256];
+        sprintf(pre_sentence, "WOMBAT,%lu,%02u:%02u:%02u,%.5f,%.5f,%li",
+                counter, hour, minute, second, latitude, longitude, altitude);
 
+        u16 crc = 0xFFFF;
+        /*u8 i;*/
+        for(i=0; i<strlen(pre_sentence); i++) {
+            crc = crc_update(crc, pre_sentence[i]);
+        }
+        char sentence[256];
+        sprintf(sentence, "UUUUUUUUUU$$$%s*%X\n", pre_sentence, crc);
         printf("%s\r\n", sentence);
+        radio_start();
+        led_turn_on(1);
+        adf_transmit_string(sentence, strlen(sentence), ADF_50_BAUD);
+        adf_transmit_string(sentence, strlen(sentence), ADF_50_BAUD);
+        adf_transmit_string(sentence, strlen(sentence), ADF_50_BAUD);
+        led_turn_off(1);
+        adf_turn_off();
     }
-
-    for(;;);
-    adf_reset_config();
-
-    printf("Setting to 434.000MHz...\r\n");
-    adf_set_n(176); adf_set_m(2437);
-    adf_set_muxout(ADF_MUXOUT_DIGITAL_LOCK);
-    adf_set_vco_adjust(3);
-    adf_set_vco_bias(9);
-    adf_write_config();
-
-    adf_set_pll_enable(ADF_ON);
-    adf_write_config();
-
-    printf("Waiting for lock...\r\n");
-
-    while(!adf_locked());
-
-    printf("Locked, enabling PA...\r\n");
-    adf_set_pa_enable(ADF_ON);
-    adf_set_pa_level(15);
-    adf_write_config();
-
-    printf("Go time!\r\n");
-
-    char buf[128];
-    sprintf(buf, "UU HELLO WORLD UU\r\n");
-    for(;;)
-        adf_transmit_string(buf, 18, ADF_50_BAUD);
 
     return 0;
 }
