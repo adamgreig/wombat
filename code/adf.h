@@ -9,7 +9,7 @@ void adf_peripheral_setup(void);
 void adf_turn_off(void);
 void adf_reset_config(void);
 void adf_write_config(void);
-void adf_transmit_string(char* data, u32 length, u32 baud);
+void adf_transmit_string(char* data, u32 baud);
 u8 adf_locked(void);
 u8 adf_reg_ready(void);
 

@@ -130,7 +130,7 @@ void adf_reset_register_two(void) {
     adf_config.r2.mod_control = ADF_MODULATION_FSK;
     adf_config.r2.gook = ADF_OFF;
     adf_config.r2.power_amplifier_level = 0;
-    adf_config.r2.modulation_deviation = 1;
+    adf_config.r2.modulation_deviation = 3;
     adf_config.r2.gfsk_modulation_control = 0;
     adf_config.r2.index_counter = 0;
 }
@@ -329,9 +329,9 @@ u16 adf_get_m() {
 }
 
 // Data transmission functions ===============================================
-void adf_transmit_string(char* data, u32 length, u32 baud) {
+void adf_transmit_string(char* data, u32 baud) {
     u32 i;
-    for(i=0; i<length; i++)
+    for(i=0; data[i]; i++)
         adf_transmit_byte(data[i], baud);
 }
 
