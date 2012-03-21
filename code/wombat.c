@@ -12,6 +12,7 @@
 #include "usart.h"
 #include "gps.h"
 #include "delay.h"
+#include "tmp.h"
 
 void radio_start(void) {
     led_turn_on(0);
@@ -176,11 +177,16 @@ u16 crc_update(u16 crc, u8 data) {
 int main(void) {
     clock_setup();
     led_peripheral_setup();
-    adf_peripheral_setup();
+    /*adf_peripheral_setup();*/
     usart_peripheral_setup();
-    gps_peripheral_setup();
+    /*gps_peripheral_setup();*/
+    tmp_peripheral_setup();
 
-    test_radio();
+    while(1) {
+        tmp_read_temperature();
+    }
+
+    /*test_radio();*/
     /*find_radio_freq();*/
 
     u32 counter;
