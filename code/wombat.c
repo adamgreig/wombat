@@ -15,7 +15,7 @@
 #include "tmp.h"
 
 void radio_start(void) {
-    led_turn_on(0);
+    led_turn_on(LED1);
 
     adf_reset_config();
 
@@ -38,7 +38,7 @@ void radio_start(void) {
         n++;
         if(n > 1000) {
             // oh no, 1 second and no lock?
-            led_turn_on(3);
+            led_turn_on(LED2);
             m -= 100;
             if(m < 900) {
                 //meh
@@ -47,7 +47,7 @@ void radio_start(void) {
             adf_set_m(m);
             adf_write_config();
             n = 0;
-            led_turn_off(3);
+            led_turn_off(LED2);
         }
     }
 
@@ -58,7 +58,7 @@ void radio_start(void) {
 
     printf("Radio ready to go!\r\n");
 
-    led_turn_off(0);
+    led_turn_off(LED1);
 
 }
 
@@ -266,11 +266,11 @@ int main(void) {
         printf("%s\r\n", sentence);
         /*radio_start();*/
         test_radio();
-        led_turn_on(1);
+        led_turn_on(LED2);
         adf_transmit_string(sentence, ADF_50_BAUD);
         adf_transmit_string(sentence, ADF_50_BAUD);
         adf_transmit_string(sentence, ADF_50_BAUD);
-        led_turn_off(1);
+        led_turn_off(LED2);
         adf_turn_off();
     }
 

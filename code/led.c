@@ -14,30 +14,10 @@ void led_peripheral_setup() {
     led_set_pin_output(GPIOC, GPIO3);
 }
 
-void led_dance() {
-    GPIOC_ODR = 0;
-    delay_ms(300);
-    GPIOC_ODR = GPIO0;
-    delay_ms(300);
-    GPIOC_ODR = GPIO0 | GPIO1;
-    delay_ms(300);
-    GPIOC_ODR = GPIO0 | GPIO1 | GPIO2;
-    delay_ms(300);
-    GPIOC_ODR = GPIO0 | GPIO1 | GPIO2 | GPIO3;
-    delay_ms(300);
-    GPIOC_ODR = GPIO1 | GPIO2 | GPIO3;
-    delay_ms(300);
-    GPIOC_ODR = GPIO2 | GPIO3;
-    delay_ms(300);
-    GPIOC_ODR = GPIO3;
-    delay_ms(300);
-    GPIOC_ODR = 0;
+void led_turn_on(u8 leds) {
+    gpio_set(GPIOC, leds);
 }
 
-void led_turn_on(u8 led) {
-    gpio_set(GPIOC, 1<<led);
-}
-
-void led_turn_off(u8 led) {
-    gpio_clear(GPIOC, 1<<led);
+void led_turn_off(u8 leds) {
+    gpio_clear(GPIOC, leds);
 }
