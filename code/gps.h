@@ -1,10 +1,23 @@
 #ifndef WOMBAT_GPS_H
 #define WOMBAT_GPS_H
 
+#include <libopencm3/stm32/f4/gpio.h>
+#include <libopencm3/stm32/usart.h>
+
+typedef struct gps_data_struct {
+    double latitude, longitude;
+    s32 altitude;
+    u8 hour, minute, second, lock_valid, data_valid;
+} gps_data;
+
 void gps_peripheral_setup(void);
-void gps_request_position(void);
-u8 gps_read_byte(void);
-void gps_get_position(double* latitude, double* longitude, s32* altitude,
-        u8* hour, u8* minute, u8* second);
+gps_data gps_get_data(void);
+
+#define GPS_USART_GPIO GPIOA
+#define GPS_USART_TX GPIO2  // This is the STM32's TX and the GPS's RX
+#define GPS_USART_RX GPIO3  // (and vice versa)
+#define GPS_USART_PINS (GPS_USART_TX | GPS_USART_RX)
+#define GPS_USART_AF GPIO_AF7
+#define GPS_USART USART2
 
 #endif

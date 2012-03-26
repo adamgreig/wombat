@@ -179,99 +179,45 @@ int main(void) {
     led_peripheral_setup();
     /*adf_peripheral_setup();*/
     usart_peripheral_setup();
-    /*gps_peripheral_setup();*/
-    tmp_peripheral_setup();
+    gps_peripheral_setup();
+    /*tmp_peripheral_setup();*/
 
-    while(1) {
-        tmp_read_temperature();
-    }
+    /*while(1) {*/
+        /*tmp_read_temperature();*/
+    /*}*/
 
     /*test_radio();*/
     /*find_radio_freq();*/
 
     u32 counter;
     for(counter=0;;counter++) {
-        s32 altitude = 0;
-        double latitude = 0.0, longitude = 0.0;
-        u8 hour = 0, minute = 0, second = 0;
-
-        /*gps_get_position(&lat, &lon, &alt, &hr, &min, &sec);*/
-        char buf[36];
-        u8 b, i;
-        for(i=0; i<36; i++) {
-            b = gps_read_byte();
-            if(i == 0 && b != 0xB5) {
-                i = 255;
-                continue;
-            }
-            buf[i] = b;
-        }
-
-        if(buf[0] != 0xB5 || buf[1] != 0x62) {
-            printf("Received packet with bad sync bits 0x%x%x, skipping.\r\n",
-                    buf[0], buf[1]);
-            continue;
-        }
-        if(buf[2] != 0x01 || buf[3] != 0x02) {
-            printf("Received packet with unexpected ID 0x%x%x, skipping.\r\n",
-                    buf[2], buf[3]);
-            continue;
-        }
-
-        u32 time = (buf[6]  | buf[7]<<8  | buf[8]<<16  | buf[9]<<24);
-        s32 lon  = (buf[10] | buf[11]<<8 | buf[12]<<16 | buf[13]<<24);
-        s32 lat  = (buf[14] | buf[15]<<8 | buf[16]<<16 | buf[17]<<24);
-        s32 alt  = (buf[22] | buf[23]<<8 | buf[24]<<16 | buf[25]<<24);
-
-        u8 rx_chk_a = buf[34];
-        u8 rx_chk_b = buf[35];
-
-        u8 chk_a = 0, chk_b = 0;
-        for(i=2; i<34; i++) {
-            chk_a = chk_a + buf[i];
-            chk_b = chk_b + chk_a;
-        }
-
-        if(chk_a != rx_chk_a || chk_b != rx_chk_b) {
-            printf("Checksums didn't match: RX 0x%x%x, calc 0x%x%x\r\n",
-                    rx_chk_a, rx_chk_b, chk_a, chk_b);
-            continue;
-        }
-
-        printf("Got position: time %lu; lon %li; lat %li; alt %li\r\n",
-                time, lon, lat, alt);
-
-        altitude = alt / 1000;
-        longitude = (double)lon / 10000000.0;
-        latitude = (double)lat / 10000000.0;
-        u8 dow = time / 86400000;
-        u32 left = time - dow*86400000;
-        hour = left / 3600000;
-        left -= hour * 3600000;
-        minute = left / 60000;
-        left -= minute * 60000;
-        second = left / 1000;
-
-        char pre_sentence[256];
-        sprintf(pre_sentence, "WOMBAT,%lu,%02u:%02u:%02u,%.5f,%.5f,%li",
-                counter, hour, minute, second, latitude, longitude, altitude);
-
+        char pre_sentence[256 - 10];
+        char sentence[256];
         u16 crc = 0xFFFF;
-        /*u8 i;*/
+        u8 i;
+
+        gps_data data = gps_get_data();
+        if(data.data_valid) {
+            sprintf(pre_sentence, "WOMBAT,%lu,%02u:%02u:%02u,%.5f,%.5f,%li",
+                    counter, data.hour, data.minute, data.second,
+                    data.latitude, data.longitude, data.altitude);
+        } else {
+            sprintf(pre_sentence, "WOMBAT,%lu,INVALID GPS DATA", counter);
+        }
+
         for(i=0; i<strlen(pre_sentence); i++) {
             crc = crc_update(crc, pre_sentence[i]);
         }
-        char sentence[256];
-        sprintf(sentence, "UUUUUUUUUU$$$%s*%X\n", pre_sentence, crc);
-        printf("%s\r\n", sentence);
+        sprintf(sentence, "$$$$$$%s*%04X\n", pre_sentence, crc);
+        printf("%s\r", sentence);
         /*radio_start();*/
-        test_radio();
-        led_turn_on(LED2);
-        adf_transmit_string(sentence, ADF_50_BAUD);
-        adf_transmit_string(sentence, ADF_50_BAUD);
-        adf_transmit_string(sentence, ADF_50_BAUD);
-        led_turn_off(LED2);
-        adf_turn_off();
+        /*test_radio();*/
+        /*led_turn_on(LED2);*/
+        /*adf_transmit_string(sentence, ADF_50_BAUD);*/
+        /*adf_transmit_string(sentence, ADF_50_BAUD);*/
+        /*adf_transmit_string(sentence, ADF_50_BAUD);*/
+        /*led_turn_off(LED2);*/
+        /*adf_turn_off();*/
     }
 
     return 0;
