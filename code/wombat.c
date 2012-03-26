@@ -14,6 +14,7 @@
 #include "delay.h"
 #include "tmp.h"
 #include "sentence.h"
+#include "watchdog.h"
 
 int main(void) {
     u32 counter;
@@ -27,11 +28,23 @@ int main(void) {
     usart_peripheral_setup();
     gps_peripheral_setup();
     tmp_peripheral_setup();
+    watchdog_setup();
+
+    setbuf(stdout, NULL);
+
+    printf("\r\n\r\n");
+    printf("************************************************************\r\n");
+    printf("*                   WOMBAT IS STARTING UP                  *\r\n");
+    printf("************************************************************\r\n");
+    printf("\r\n\r\n");
 
     for(counter=0;;counter++) {
+        watchdog_reset();
+
         sdata.counter = counter;
         gdata = gps_get_data();
         if(gdata.data_valid) {
+            printf("Got valid GPS data!\r\n");
             float temperature = tmp_read_temperature();
             sdata.gps = gdata;
             sdata.temperature = temperature;
@@ -40,15 +53,21 @@ int main(void) {
             sentence = sentence_generate_invalid(sdata);
         }
 
-        printf("%s\r", sentence);
-        /*radio_start();*/
-        /*test_radio();*/
-        /*led_turn_on(LED2);*/
-        /*adf_transmit_string(sentence, ADF_50_BAUD);*/
-        /*adf_transmit_string(sentence, ADF_50_BAUD);*/
-        /*adf_transmit_string(sentence, ADF_50_BAUD);*/
-        /*led_turn_off(LED2);*/
-        /*adf_turn_off();*/
+        printf("Current sentence: %s\r", sentence);
+
+        if(counter % 3) {
+            printf("Transmitting at 50 baud once...");
+            adf_transmit_string(sentence, ADF_50_BAUD);
+            printf("done.\r\n\r\n");
+        } else {
+            printf("Transmitting at 300 baud five times...");
+            adf_transmit_string(sentence, ADF_300_BAUD);
+            adf_transmit_string(sentence, ADF_300_BAUD);
+            adf_transmit_string(sentence, ADF_300_BAUD);
+            adf_transmit_string(sentence, ADF_300_BAUD);
+            adf_transmit_string(sentence, ADF_300_BAUD);
+            printf("done.\r\n\r\n");
+        }
     }
 
     return 0;
