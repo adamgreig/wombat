@@ -1,7 +1,7 @@
-#include <libopencm3/cm3/common.h>
-
 #ifndef WOMBAT_DELAY_H
 #define WOMBAT_DELAY_H
+
+#include <libopencm3/cm3/common.h>
 
 void delay(u32 count);
 void delay_ms(u32 ms);
