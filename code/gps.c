@@ -113,8 +113,13 @@ gps_data gps_get_status(void) {
     if(gps_bad_checksum(msg, 24))
         return data;
 
-    u8 status = msg[6+5];
-    data.lock_valid = status & 0x01;
+    u8 gpsFix = msg[6+4];
+    u8 flags = msg[6+5];
+
+    if((gpsFix == 0x02 || gpsFix == 0x03 || gpsFix == 0x04) && (flags & 1))
+        data.lock_valid = 1;
+    else
+        data.lock_valid = 0;
 
     data.data_valid = 1;
     

@@ -53,3 +53,10 @@ char* sentence_generate_invalid(sentence_data data) {
     sentence_finalise();
     return sentence_buffer;
 }
+
+char* sentence_generate_no_lock(sentence_data data) {
+    sprintf(sentence_pre_buffer, "WOMBAT,%lu,NO GPS LOCK", data.counter);
+
+    sentence_finalise();
+    return sentence_buffer;
+}

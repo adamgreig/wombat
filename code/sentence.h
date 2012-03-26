@@ -13,5 +13,6 @@ typedef struct sentence_data_struct {
 
 char* sentence_generate(sentence_data data);
 char* sentence_generate_invalid(sentence_data data);
+char* sentence_generate_no_lock(sentence_data data);
 
 #endif

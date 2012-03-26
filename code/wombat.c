@@ -47,14 +47,27 @@ int main(void) {
         sdata.counter = counter;
         gdata = gps_get_data();
         if(gdata.data_valid) {
-            printf("Got valid GPS data!\r\n");
-            led_quickflash_inner();
-            float temperature = tmp_read_temperature();
-            sdata.gps = gdata;
-            sdata.temperature = temperature;
-            sentence = sentence_generate(sdata);
+            printf("Got valid GPS data... ");
+            if(gdata.lock_valid) {
+                printf("GPS locked.\r\n");
+                led_quickflash_inner();
+
+                printf("Getting temperature...");
+                float temperature = tmp_read_temperature();
+                printf(" done.\r\n");
+
+                sdata.gps = gdata;
+                sdata.temperature = temperature;
+                sentence = sentence_generate(sdata);
+            } else {
+                printf("no GPS lock.\r\n");
+                led_quickflash_outer();
+                sentence = sentence_generate_no_lock(sdata);
+            }
         } else {
             printf("Invalid GPS data.\r\n");
+            led_quickflash_outer();
+            led_quickflash_outer();
             led_quickflash_outer();
             sentence = sentence_generate_invalid(sdata);
         }
