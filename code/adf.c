@@ -1,4 +1,3 @@
-
 #include <libopencm3/stm32/f4/gpio.h>
 
 #include "delay.h"
@@ -8,7 +7,6 @@
 // Configuration storage structs =============================================
 struct {
     struct {
-        u8 address;
         u16 frequency_error_correction;
         u8 r_divider;
         u8 crystal_doubler;
@@ -19,14 +17,12 @@ struct {
     } r0;
 
     struct {
-        u8 address;
         u16 fractional_n;
         u8 integer_n;
         u8 prescaler;
     } r1;
 
     struct {
-        u8 address;
         u8 mod_control;
         u8 gook;
         u8 power_amplifier_level;
@@ -36,7 +32,6 @@ struct {
     } r2;
 
     struct {
-        u8 address;
         u8 pll_enable;
         u8 pa_enable;
         u8 clkout_enable;
@@ -69,6 +64,7 @@ void adf_write_register_three(void);
 void adf_write_register(u32 reg);
 void adf_transmit_byte(u8 byte, u32 baud);
 void adf_transmit_bit(u8 bit);
+u8 adf_read_muxout(void);
 
 // STM32 peripheral functions ================================================
 void adf_set_pin_output(u32 prt, u16 pin) {
@@ -109,25 +105,22 @@ void adf_reset_config(void) {
 }
 
 void adf_reset_register_zero(void) {
-    adf_config.r0.address = 0;
     adf_config.r0.frequency_error_correction = 0;
-    adf_config.r0.r_divider = 2;
+    adf_config.r0.r_divider = 1;
     adf_config.r0.crystal_doubler = ADF_OFF;
     adf_config.r0.crystal_oscillator_disable = ADF_OFF;
     adf_config.r0.clock_out_divider = 0;
-    adf_config.r0.vco_adjust = 3;
+    adf_config.r0.vco_adjust = 0;
     adf_config.r0.output_divider = 0;
 }
 
 void adf_reset_register_one(void) {
-    adf_config.r1.address = 1;
     adf_config.r1.fractional_n = 0;
     adf_config.r1.integer_n = 0;
     adf_config.r1.prescaler = ADF_PRESCALER_4_5;
 }
 
 void adf_reset_register_two(void) {
-    adf_config.r2.address = 2;
     adf_config.r2.mod_control = ADF_MODULATION_FSK;
     adf_config.r2.gook = ADF_OFF;
     adf_config.r2.power_amplifier_level = 0;
@@ -137,7 +130,6 @@ void adf_reset_register_two(void) {
 }
 
 void adf_reset_register_three(void) {
-    adf_config.r3.address = 3;
     adf_config.r3.pll_enable = ADF_OFF;
     adf_config.r3.pa_enable = ADF_OFF;
     adf_config.r3.clkout_enable = ADF_OFF;
@@ -148,7 +140,7 @@ void adf_reset_register_three(void) {
     adf_config.r3.vco_disable = ADF_OFF;
     adf_config.r3.muxout = ADF_MUXOUT_REG_READY;
     adf_config.r3.ld_precision = ADF_LD_PRECISION_5_CYCLES;
-    adf_config.r3.vco_bias = 9;
+    adf_config.r3.vco_bias = 6;
     adf_config.r3.pa_bias = 4;
     adf_config.r3.pll_test_mode = 0;
     adf_config.r3.sd_test_mode = 0;
@@ -179,55 +171,55 @@ void adf_write_config(void) {
 
 void adf_write_register_zero(void) {
     u32 reg =
-        ((adf_config.r0.address & 0x3) << 0) |
-        ((adf_config.r0.frequency_error_correction & 0x7FF) << 2) |
-        ((adf_config.r0.r_divider & 0xF) << 13) |
-        ((adf_config.r0.crystal_doubler & 0x1) << 17) |
-        ((adf_config.r0.crystal_oscillator_disable & 0x1) << 18) |
-        ((adf_config.r0.clock_out_divider & 0xF) << 19) |
-        ((adf_config.r0.vco_adjust & 0x3) << 23) |
-        ((adf_config.r0.output_divider & 0x3) << 25);
+        (0) |
+        ((adf_config.r0.frequency_error_correction  & 0x7FF) <<  2) |
+        ((adf_config.r0.r_divider                   & 0xF  ) << 13) |
+        ((adf_config.r0.crystal_doubler             & 0x1  ) << 17) |
+        ((adf_config.r0.crystal_oscillator_disable  & 0x1  ) << 18) |
+        ((adf_config.r0.clock_out_divider           & 0xF  ) << 19) |
+        ((adf_config.r0.vco_adjust                  & 0x3  ) << 23) |
+        ((adf_config.r0.output_divider              & 0x3  ) << 25);
     adf_write_register(reg);
 }
 
 void adf_write_register_one(void) {
     u32 reg =
-        ((adf_config.r1.address & 0x3) << 0) |
-        ((adf_config.r1.fractional_n & 0xFFF) << 2) |
-        ((adf_config.r1.integer_n & 0xFF) << 14) |
-        ((adf_config.r1.prescaler & 0x1) << 22);
+        (1) |
+        ((adf_config.r1.fractional_n                & 0xFFF) <<  2) |
+        ((adf_config.r1.integer_n                   & 0xFF ) << 14) |
+        ((adf_config.r1.prescaler                   & 0x1  ) << 22);
     adf_write_register(reg);
 }
 
 void adf_write_register_two(void) {
     u32 reg =
-        ((adf_config.r2.address & 0x3) << 0) |
-        ((adf_config.r2.mod_control & 0x3) << 2) |
-        ((adf_config.r2.gook & 0x1) << 4) |
-        ((adf_config.r2.power_amplifier_level & 0x3F) << 5) |
-        ((adf_config.r2.modulation_deviation & 0x1FF) << 11) |
-        ((adf_config.r2.gfsk_modulation_control & 0x7) << 20) |
-        ((adf_config.r2.index_counter & 0x3) << 23);
+        (2) |
+        ((adf_config.r2.mod_control                 & 0x3  ) <<  2) |
+        ((adf_config.r2.gook                        & 0x1  ) <<  4) |
+        ((adf_config.r2.power_amplifier_level       & 0x3F ) <<  5) |
+        ((adf_config.r2.modulation_deviation        & 0x1FF) << 11) |
+        ((adf_config.r2.gfsk_modulation_control     & 0x7  ) << 20) |
+        ((adf_config.r2.index_counter               & 0x3  ) << 23);
     adf_write_register(reg);
 }
 
 void adf_write_register_three(void) {
     u32 reg =
-        ((adf_config.r3.address & 0x3) << 0) |
-        ((adf_config.r3.pll_enable & 0x1) << 2) |
-        ((adf_config.r3.pa_enable & 0x1) << 3) |
-        ((adf_config.r3.clkout_enable & 0x1) << 4) |
-        ((adf_config.r3.data_invert & 0x1) << 5) |
-        ((adf_config.r3.charge_pump_current & 0x3) << 6) |
-        ((adf_config.r3.bleed_up & 0x1) << 8) |
-        ((adf_config.r3.bleed_down & 0x1) << 9) |
-        ((adf_config.r3.vco_disable & 0x1) << 10) |
-        ((adf_config.r3.muxout & 0xF) << 11) |
-        ((adf_config.r3.ld_precision & 0x1) << 15) |
-        ((adf_config.r3.vco_bias & 0xF) << 16) |
-        ((adf_config.r3.pa_bias & 0x7) << 20) |
-        ((adf_config.r3.pll_test_mode & 0x1F) << 23) |
-        ((adf_config.r3.sd_test_mode & 0xF) << 28);
+        (3) |
+        ((adf_config.r3.pll_enable                  & 0x1  ) <<  2) |
+        ((adf_config.r3.pa_enable                   & 0x1  ) <<  3) |
+        ((adf_config.r3.clkout_enable               & 0x1  ) <<  4) |
+        ((adf_config.r3.data_invert                 & 0x1  ) <<  5) |
+        ((adf_config.r3.charge_pump_current         & 0x3  ) <<  6) |
+        ((adf_config.r3.bleed_up                    & 0x1  ) <<  8) |
+        ((adf_config.r3.bleed_down                  & 0x1  ) <<  9) |
+        ((adf_config.r3.vco_disable                 & 0x1  ) << 10) |
+        ((adf_config.r3.muxout                      & 0xF  ) << 11) |
+        ((adf_config.r3.ld_precision                & 0x1  ) << 15) |
+        ((adf_config.r3.vco_bias                    & 0xF  ) << 16) |
+        ((adf_config.r3.pa_bias                     & 0x7  ) << 20) |
+        ((adf_config.r3.pll_test_mode               & 0x1F ) << 23) |
+        ((adf_config.r3.sd_test_mode                & 0xF  ) << 28);
     adf_write_register(reg);
 }
 
@@ -272,7 +264,7 @@ void adf_set_vco_adjust(u8 adjust) {
 void adf_set_frequency(u32 khz) {
     u32 f_pfd = 2458;
     u8 n = khz / f_pfd;
-    u16 m = ((khz*1000)/f_pfd) - (n * 1000);
+    u16 m = ((((khz*1000)/f_pfd) - (n * 1000)) * 4096) / 1000;
     adf_set_n(n);
     adf_set_m(m);
 }
@@ -329,6 +321,28 @@ u16 adf_get_m() {
     return adf_config.r1.fractional_n;
 }
 
+void adf_setup(void) {
+    adf_set_r_divider(2);
+    /*adf_set_frequency(434000);*/
+    adf_set_n(176);
+    adf_set_m(2320);
+    adf_set_pa_level(50);
+    adf_set_muxout(ADF_MUXOUT_DIGITAL_LOCK);
+    adf_write_config();
+    adf_set_pll_enable(ADF_ON);
+    adf_write_config();
+}
+
+void adf_power_on(void) {
+    adf_set_pa_enable(ADF_ON);
+    adf_write_config();
+}
+
+void adf_power_off(void) {
+    adf_set_pa_enable(ADF_OFF);
+    adf_write_config();
+}
+
 // Data transmission functions ===============================================
 void adf_transmit_string(char* data, u32 baud) {
     u32 i;
@@ -369,10 +383,14 @@ void adf_transmit_bit(u8 bit) {
 }
 
 // MUXOUT reading functions ==================================================
-u8 adf_locked(void) {
+u8 adf_read_muxout(void) {
     return (u8)(gpio_get(ADF_MUXOUT_PORT, ADF_MUXOUT) > 0);
 }
 
+u8 adf_locked(void) {
+    return adf_read_muxout();
+}
+
 u8 adf_reg_ready(void) {
-    return (u8)(gpio_get(ADF_MUXOUT_PORT, ADF_MUXOUT) > 0);
+    return adf_read_muxout();
 }

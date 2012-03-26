@@ -28,6 +28,10 @@ void adf_set_muxout(u8 muxout);
 void adf_set_vco_bias(u8 bias);
 void adf_set_pa_bias(u8 bias);
 
+void adf_setup(void);
+void adf_power_on(void);
+void adf_power_off(void);
+
 u8 adf_get_n(void);
 u16 adf_get_m(void);
 
