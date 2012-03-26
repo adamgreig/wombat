@@ -180,11 +180,7 @@ int main(void) {
     /*adf_peripheral_setup();*/
     usart_peripheral_setup();
     gps_peripheral_setup();
-    /*tmp_peripheral_setup();*/
-
-    /*while(1) {*/
-        /*tmp_read_temperature();*/
-    /*}*/
+    tmp_peripheral_setup();
 
     /*test_radio();*/
     /*find_radio_freq();*/
@@ -198,9 +194,11 @@ int main(void) {
 
         gps_data data = gps_get_data();
         if(data.data_valid) {
-            sprintf(pre_sentence, "WOMBAT,%lu,%02u:%02u:%02u,%.5f,%.5f,%li",
+            float temperature = tmp_read_temperature();
+            sprintf(pre_sentence,
+                    "WOMBAT,%lu,%02u:%02u:%02u,%.5f,%.5f,%li,%.0f",
                     counter, data.hour, data.minute, data.second,
-                    data.latitude, data.longitude, data.altitude);
+                    data.latitude, data.longitude, data.altitude, temperature);
         } else {
             sprintf(pre_sentence, "WOMBAT,%lu,INVALID GPS DATA", counter);
         }

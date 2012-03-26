@@ -55,8 +55,6 @@ float tmp_read_temperature(void) {
 
     temperature >>= 4;
 
-    printf("Temperature: %.2f\xC2\xB0""C\r\n", (float)temperature * 0.0625);
-
     return (float)temperature * 0.0625;
 }
 
