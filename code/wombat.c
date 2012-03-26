@@ -59,24 +59,6 @@ int main(void) {
     led_flash_outer();
     led_flash_inner();
 
-    for(;;) {
-        char temp_sentence[128];
-        u8 adj, bias;
-        watchdog_reset();
-        adf_lock();
-        adj = adf_get_vco_adjust();
-        bias = adf_get_vco_bias();
-        float temp = tmp_read_temperature();
-        sprintf(temp_sentence, "$$$%u,%u,%.2f$$$\n", adj, bias, temp);
-        adf_power_on();
-        adf_transmit_string(temp_sentence, ADF_300_BAUD);
-        adf_transmit_string(temp_sentence, ADF_300_BAUD);
-        adf_transmit_string(temp_sentence, ADF_300_BAUD);
-        adf_transmit_string(temp_sentence, ADF_300_BAUD);
-        adf_transmit_string(temp_sentence, ADF_300_BAUD);
-        adf_power_off();
-    }
-
     for(counter=0;;counter++) {
         watchdog_reset();
 
