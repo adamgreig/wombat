@@ -1,4 +1,3 @@
-
 #ifndef WOMBAT_ADF_H
 #define WOMBAT_ADF_H
 

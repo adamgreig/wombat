@@ -1,9 +1,7 @@
 #ifndef WOMBAT_WATCHDOG_H
 #define WOMBAT_WATCHDOG_H
 
-#include <libopencm3/stm32/iwdg.h>
-
-void watchdog_setup();
-void watchdog_reset();
+void watchdog_setup(void);
+void watchdog_reset(void);
 
 #endif
