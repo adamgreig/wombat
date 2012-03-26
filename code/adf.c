@@ -322,13 +322,13 @@ u16 adf_get_m() {
 }
 
 void adf_setup(void) {
+    adf_reset_config();
     adf_set_r_divider(2);
     /*adf_set_frequency(434000);*/
     adf_set_n(176);
-    adf_set_m(2320);
+    adf_set_m(2437);
     adf_set_pa_level(50);
     adf_set_muxout(ADF_MUXOUT_DIGITAL_LOCK);
-    adf_write_config();
     adf_set_pll_enable(ADF_ON);
     adf_write_config();
 }
