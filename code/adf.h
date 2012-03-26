@@ -31,9 +31,12 @@ void adf_set_pa_bias(u8 bias);
 void adf_setup(void);
 void adf_power_on(void);
 void adf_power_off(void);
+u8 adf_lock(void);
 
 u8 adf_get_n(void);
 u16 adf_get_m(void);
+u8 adf_get_vco_adjust(void);
+u8 adf_get_vco_bias(void);
 
 // The ADF7012 pin connections ===============================================
 #define ADF_CLK         GPIO5
@@ -56,6 +59,7 @@ u16 adf_get_m(void);
 // Timing constants ==========================================================
 #define ADF_50_BAUD     (u32)(479441)
 #define ADF_300_BAUD    (u32)(79915)
+#define ADF_1200_BAUD   (u32)(19979)
 
 // General Purpose ===========================================================
 #define ADF_OFF 0

@@ -16,19 +16,21 @@
 #include "sentence.h"
 #include "watchdog.h"
 
+
 int main(void) {
     u32 counter;
     char* sentence;
     gps_data gdata;
     sentence_data sdata;
 
+    watchdog_setup();
+
     clock_setup();
     led_peripheral_setup();
-    /*adf_peripheral_setup();*/
+    adf_peripheral_setup();
     usart_peripheral_setup();
     gps_peripheral_setup();
     tmp_peripheral_setup();
-    watchdog_setup();
 
     setbuf(stdout, NULL);
 
@@ -38,8 +40,42 @@ int main(void) {
     printf("************************************************************\r\n");
     printf("\r\n\r\n");
 
+    printf("Configuring radio... ");
+    adf_setup();
+    printf("done, locking... ");
+    if(!adf_lock()) {
+        printf("FAIL, stopping.\r\n");
+        for(;;)
+            led_flash_outer();
+    }
+    printf("locked, turning on... ");
+    adf_power_on();
+    printf("done.\r\n");
+
+    adf_transmit_string("\n\n*** WOMBAT INITIALISING ***\n\n", ADF_300_BAUD);
+
+    adf_power_off();
+
     led_flash_outer();
     led_flash_inner();
+
+    for(;;) {
+        char temp_sentence[128];
+        u8 adj, bias;
+        watchdog_reset();
+        adf_lock();
+        adj = adf_get_vco_adjust();
+        bias = adf_get_vco_bias();
+        float temp = tmp_read_temperature();
+        sprintf(temp_sentence, "$$$%u,%u,%.2f$$$\n", adj, bias, temp);
+        adf_power_on();
+        adf_transmit_string(temp_sentence, ADF_300_BAUD);
+        adf_transmit_string(temp_sentence, ADF_300_BAUD);
+        adf_transmit_string(temp_sentence, ADF_300_BAUD);
+        adf_transmit_string(temp_sentence, ADF_300_BAUD);
+        adf_transmit_string(temp_sentence, ADF_300_BAUD);
+        adf_power_off();
+    }
 
     for(counter=0;;counter++) {
         watchdog_reset();
@@ -52,9 +88,9 @@ int main(void) {
                 printf("GPS locked.\r\n");
                 led_quickflash_inner();
 
-                printf("Getting temperature...");
+                printf("Getting temperature... ");
                 float temperature = tmp_read_temperature();
-                printf(" done.\r\n");
+                printf("done.\r\n");
 
                 sdata.gps = gdata;
                 sdata.temperature = temperature;
@@ -74,12 +110,14 @@ int main(void) {
 
         printf("Current sentence: %s\r", sentence);
 
+        adf_power_on();
+
         if(counter % 3) {
-            printf("Transmitting at 50 baud once...");
+            printf("Transmitting at 50 baud once... ");
             adf_transmit_string(sentence, ADF_50_BAUD);
             printf("done.\r\n\r\n");
         } else {
-            printf("Transmitting at 300 baud five times...");
+            printf("Transmitting at 300 baud five times... ");
             adf_transmit_string(sentence, ADF_300_BAUD);
             adf_transmit_string(sentence, ADF_300_BAUD);
             adf_transmit_string(sentence, ADF_300_BAUD);
@@ -87,6 +125,18 @@ int main(void) {
             adf_transmit_string(sentence, ADF_300_BAUD);
             printf("done.\r\n\r\n");
         }
+
+        if(counter % 10) {
+            printf("Re-locking VCO after ten sentences... ");
+            if(!adf_lock()) {
+                printf("FAIL, stopping.\r\n");
+                for(;;)
+                    led_flash_outer();
+            }
+            printf("done.\r\n");
+        }
+
+        adf_power_off();
     }
 
     return 0;

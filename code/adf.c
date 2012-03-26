@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <libopencm3/stm32/f4/gpio.h>
 
 #include "delay.h"
@@ -262,11 +263,14 @@ void adf_set_vco_adjust(u8 adjust) {
 }
 
 void adf_set_frequency(u32 khz) {
-    u32 f_pfd = 2458;
-    u8 n = khz / f_pfd;
-    u16 m = ((((khz*1000)/f_pfd) - (n * 1000)) * 4096) / 1000;
+    u32 f_pfd = 24576;
+    u8 n = (khz*10) / f_pfd;
+    u32 m = (u64)((u64)khz * 10000) / f_pfd;
+    m -= n * 1000;
+    m *= 4096;
+    m /= 1000;
     adf_set_n(n);
-    adf_set_m(m);
+    adf_set_m((u16)m);
 }
 
 void adf_set_n(u8 n) {
@@ -321,20 +325,43 @@ u16 adf_get_m() {
     return adf_config.r1.fractional_n;
 }
 
+u8 adf_get_vco_adjust(void) {
+    return adf_config.r0.vco_adjust;
+}
+
+u8 adf_get_vco_bias(void) {
+    return adf_config.r3.vco_bias;
+}
+
 void adf_setup(void) {
     adf_reset_config();
     adf_set_r_divider(2);
-    /*adf_set_frequency(434000);*/
-    adf_set_n(176);
-    adf_set_m(2437);
-    adf_set_pa_level(50);
+    adf_set_frequency(434000);
     adf_set_muxout(ADF_MUXOUT_DIGITAL_LOCK);
     adf_set_pll_enable(ADF_ON);
     adf_write_config();
 }
 
+u8 adf_lock(void) {
+    u8 adj = 0, bias = 5;
+    while(!adf_locked()) {
+        adf_set_vco_adjust(adj);
+        adf_set_vco_bias(bias);
+        adf_write_config();
+        delay_ms(50);
+        if(++bias == 14) {
+            bias = 1;
+            if(++adj == 4) {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
 void adf_power_on(void) {
     adf_set_pa_enable(ADF_ON);
+    adf_set_pa_level(60);
     adf_write_config();
 }
 
