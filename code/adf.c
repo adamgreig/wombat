@@ -3,6 +3,7 @@
 
 #include "delay.h"
 #include "adf.h"
+#include "led.h"
 
 // Configuration storage structs =============================================
 struct {
@@ -338,6 +339,8 @@ void adf_transmit_string(char* data, u32 baud) {
 void adf_transmit_byte(u8 byte, u32 baud) {
     s8 i;
     
+    led_quickflash(LED4);
+
     // Start bit
     adf_transmit_bit(0);
     delay(baud);
@@ -358,10 +361,11 @@ void adf_transmit_byte(u8 byte, u32 baud) {
 }
 
 void adf_transmit_bit(u8 bit) {
-    if(bit)
+    if(bit) {
         gpio_set(ADF_TXDATA_PORT, ADF_TXDATA);
-    else
+    } else {
         gpio_clear(ADF_TXDATA_PORT, ADF_TXDATA);
+    }
 }
 
 // MUXOUT reading functions ==================================================

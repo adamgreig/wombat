@@ -100,10 +100,12 @@ u8 gps_bad_checksum(u8* msg, u8 length) {
 }
 
 gps_data gps_get_status(void) {
+    printf("Getting status...");
     gps_data data = gps_init_data();
     u8 msg[24];
     gps_request(gps_status_request);
     gps_read_message(msg, 24);
+    printf("done.\r\n");
     if(gps_bad_header(msg))
         return data;
     if(gps_bad_id(msg, 0x03))
@@ -120,10 +122,12 @@ gps_data gps_get_status(void) {
 }
 
 gps_data gps_get_time(void) {
+    printf("Getting time...");
     gps_data data = gps_init_data();
     u8 msg[28];
     gps_request(gps_time_request);
     gps_read_message(msg, 28);
+    printf("done.\r\n");
     if(gps_bad_header(msg))
         return data;
     if(gps_bad_id(msg, 0x21))
@@ -149,10 +153,12 @@ gps_data gps_get_time(void) {
 }
 
 gps_data gps_get_position(void) {
+    printf("Getting position...");
     gps_data data = gps_init_data();
     u8 msg[36];
     gps_request(gps_position_request);
     gps_read_message(msg, 36);
+    printf("done.\r\n");
     if(gps_bad_header(msg))
         return data;
     if(gps_bad_id(msg, 0x02))

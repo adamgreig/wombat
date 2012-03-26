@@ -38,6 +38,9 @@ int main(void) {
     printf("************************************************************\r\n");
     printf("\r\n\r\n");
 
+    led_flash_outer();
+    led_flash_inner();
+
     for(counter=0;;counter++) {
         watchdog_reset();
 
@@ -45,11 +48,14 @@ int main(void) {
         gdata = gps_get_data();
         if(gdata.data_valid) {
             printf("Got valid GPS data!\r\n");
+            led_quickflash_inner();
             float temperature = tmp_read_temperature();
             sdata.gps = gdata;
             sdata.temperature = temperature;
             sentence = sentence_generate(sdata);
         } else {
+            printf("Invalid GPS data.\r\n");
+            led_quickflash_outer();
             sentence = sentence_generate_invalid(sdata);
         }
 
