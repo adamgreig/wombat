@@ -49,7 +49,7 @@ OOCD_BOARD 		?= openocd/wombat
 
 # Black magic probe specific variables
 # Set the BMP_PORT to a serial port and then BMP is used for flashing
-BMP_PORT        ?=
+BMP_PORT        ?= /dev/ttyACM0
 
 # Be silent per default, but 'make V=1' will show all compiler calls.
 ifneq ($(V),1)
@@ -104,6 +104,7 @@ clean:
 	$(Q)rm -f *.srec
 	$(Q)rm -f *.list
 
+ifeq ($(BMP_PORT),)
 %.flash: %.hex
 	@printf "  FLASH   $<\n"
 	@# IMPORTANT: Don't use "resume", only "reset" will work correctly!
@@ -113,6 +114,14 @@ clean:
 		    -c "flash write_image erase $(*).hex" \
 		    -c "reset" \
 		    -c "shutdown" $(NULL)
+else
+%.flash: %.elf
+	@echo "  GDB   $(*).elf (flash)"
+	$(Q)$(GDB) --batch \
+		   -ex 'target extended-remote $(BMP_PORT)' \
+		   -x $(TOOLCHAIN_DIR)/scripts/black_magic_probe_flash.scr \
+		   $(*).elf
+endif
 
 .PHONY: images clean
 
