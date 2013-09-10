@@ -1,55 +1,58 @@
-# Modified from original for Wombat. Still in testing.
+BINARY = wombat
 
-BINARY 			= wombat
 
 ##
 ## This file is part of the libopencm3 project.
 ##
 ## Copyright (C) 2009 Uwe Hermann <uwe@hermann-uwe.de>
 ## Copyright (C) 2010 Piotr Esden-Tempski <piotr@esden.net>
+## Copyright (C) 2011 Fergus Noble <fergusnoble@gmail.com>
 ##
-## This program is free software: you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
+## This library is free software: you can redistribute it and/or modify
+## it under the terms of the GNU Lesser General Public License as published by
 ## the Free Software Foundation, either version 3 of the License, or
 ## (at your option) any later version.
 ##
-## This program is distributed in the hope that it will be useful,
+## This library is distributed in the hope that it will be useful,
 ## but WITHOUT ANY WARRANTY; without even the implied warranty of
 ## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## GNU Lesser General Public License for more details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU Lesser General Public License
+## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-PREFIX			?= arm-none-eabi
-CC				= $(PREFIX)-gcc
-LD				= $(PREFIX)-gcc
-OBJCOPY			= $(PREFIX)-objcopy
-OBJDUMP			= $(PREFIX)-objdump
-GDB				= $(PREFIX)-gdb
-TOOLCHAIN_DIR   = libopencm3
-CFLAGS			+= -Os -g -Wall -Wextra -I$(TOOLCHAIN_DIR)/include \
-		   		   -fno-common -mcpu=cortex-m4 -mthumb -msoft-float -MD \
-				   -DSTM32F4
-LDSCRIPT		?= $(BINARY).ld
-LDFLAGS			+= -lc -lnosys -L$(TOOLCHAIN_DIR)/lib \
-				   -L$(TOOLCHAIN_DIR)/lib/stm32/f4 \
-		   		   -T$(LDSCRIPT) -nostartfiles -Wl,--gc-sections \
-		   		   -mthumb -mcpu=cortex-m4 -march=armv7 -mfix-cortex-m3-ldrd \
-				   -msoft-float
-OBJS			+= $(BINARY).o
-OBJS 			= $(sort \
-                  $(patsubst %.c,%.o,$(wildcard *.c)) \
-                  $(patsubst %.s,%.o,$(wildcard *.s)))
+PREFIX	?= arm-none-eabi
+# PREFIX		?= arm-elf
+CC		= $(PREFIX)-gcc
+LD		= $(PREFIX)-gcc
+OBJCOPY		= $(PREFIX)-objcopy
+OBJDUMP		= $(PREFIX)-objdump
+GDB		= $(PREFIX)-gdb
+FLASH		= $(shell which st-flash)
 
-OOCD			?= openocd
-OOCD_INTERFACE 	?= interface/olimex-jtag-tiny
-OOCD_BOARD 		?= openocd/wombat
+TOOLCHAIN_DIR = ./libopencm3
 
+CFLAGS		+= -Os -g \
+		   -Wall -Wextra -Wimplicit-function-declaration \
+		   -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
+		   -Wundef -Wshadow \
+		   -I$(TOOLCHAIN_DIR)/include \
+		   -fno-common -mcpu=cortex-m4 -mthumb \
+		   -mfloat-abi=hard -mfpu=fpv4-sp-d16 -MD -DSTM32F4
+LDSCRIPT	?= $(BINARY).ld
+LDFLAGS		+= --static -lc -lnosys -L$(TOOLCHAIN_DIR)/lib \
+			 -L$(TOOLCHAIN_DIR)/lib/stm32/f4 \
+		   -T$(LDSCRIPT) -nostartfiles -Wl,--gc-sections \
+		   -mthumb -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
+OBJS		+= $(BINARY).o
+
+OOCD		?= openocd
+OOCD_INTERFACE	?= flossjtag
+OOCD_BOARD	?= olimex_stm32_h103
 # Black magic probe specific variables
 # Set the BMP_PORT to a serial port and then BMP is used for flashing
-BMP_PORT        ?= /dev/ttyACM0
+BMP_PORT    ?= /dev/ttyACM0
 
 # Be silent per default, but 'make V=1' will show all compiler calls.
 ifneq ($(V),1)
@@ -69,7 +72,7 @@ images: $(BINARY).images
 flash: $(BINARY).flash
 
 %.images: %.bin %.hex %.srec %.list
-	@#echo "*** $* images generated ***"
+	@#printf "*** $* images generated ***\n"
 
 %.bin: %.elf
 	@#printf "  OBJCOPY $(*).bin\n"
@@ -87,7 +90,7 @@ flash: $(BINARY).flash
 	@#printf "  OBJDUMP $(*).list\n"
 	$(Q)$(OBJDUMP) -S $(*).elf > $(*).list
 
-%.elf: $(OBJS) $(LDSCRIPT) $(TOOLCHAIN_DIR)/lib/stm32/f4/libopencm3_stm32f4.a
+%.elf: $(OBJS) $(LDSCRIPT) $(TOOLCHAIN_DIR)/lib/libopencm3_stm32f4.a
 	@#printf "  LD      $(subst $(shell pwd)/,,$(@))\n"
 	$(Q)$(LD) -o $(*).elf $(OBJS) -lopencm3_stm32f4 $(LDFLAGS)
 
@@ -104,19 +107,39 @@ clean:
 	$(Q)rm -f *.srec
 	$(Q)rm -f *.list
 
+%.stlink-flash: %.bin
+	@printf "  FLASH  $<\n"
+	$(Q)$(FLASH) write $(*).bin 0x8000000
+
+	
 ifeq ($(BMP_PORT),)
+ifeq ($(OOCD_SERIAL),)
 %.flash: %.hex
 	@printf "  FLASH   $<\n"
 	@# IMPORTANT: Don't use "resume", only "reset" will work correctly!
-	$(Q)$(OOCD) -f $(OOCD_INTERFACE).cfg \
-		    -f $(OOCD_BOARD).cfg \
+	$(Q)$(OOCD) -f interface/$(OOCD_INTERFACE).cfg \
+		    -f board/$(OOCD_BOARD).cfg \
 		    -c "init" -c "reset init" \
-		    -c "flash write_image erase $(*).hex" \
+		    -c "stm32x mass_erase 0" \
+		    -c "flash write_image $(*).hex" \
 		    -c "reset" \
 		    -c "shutdown" $(NULL)
 else
+%.flash: %.hex
+	@printf "  FLASH   $<\n"
+	@# IMPORTANT: Don't use "resume", only "reset" will work correctly!
+	$(Q)$(OOCD) -f interface/$(OOCD_INTERFACE).cfg \
+		    -f board/$(OOCD_BOARD).cfg \
+		    -c "ft2232_serial $(OOCD_SERIAL)" \
+		    -c "init" -c "reset init" \
+		    -c "stm32x mass_erase 0" \
+		    -c "flash write_image $(*).hex" \
+		    -c "reset" \
+		    -c "shutdown" $(NULL)
+endif
+else
 %.flash: %.elf
-	@echo "  GDB   $(*).elf (flash)"
+	@printf "  GDB   $(*).elf (flash)\n"
 	$(Q)$(GDB) --batch \
 		   -ex 'target extended-remote $(BMP_PORT)' \
 		   -x $(TOOLCHAIN_DIR)/scripts/black_magic_probe_flash.scr \
