@@ -23,7 +23,6 @@ BINARY = wombat
 ##
 
 PREFIX	?= arm-none-eabi
-# PREFIX		?= arm-elf
 CC		= $(PREFIX)-gcc
 LD		= $(PREFIX)-gcc
 OBJCOPY		= $(PREFIX)-objcopy
@@ -46,6 +45,9 @@ LDFLAGS		+= --static -lc -lnosys -L$(TOOLCHAIN_DIR)/lib \
 		   -T$(LDSCRIPT) -nostartfiles -Wl,--gc-sections \
 		   -mthumb -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 OBJS		+= $(BINARY).o
+OBJS 		= $(sort \
+            	$(patsubst %.c,%.o,$(wildcard *.c)) \
+                $(patsubst %.s,%.o,$(wildcard *.s)))
 
 OOCD		?= openocd
 OOCD_INTERFACE	?= flossjtag
