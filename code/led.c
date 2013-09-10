@@ -3,6 +3,8 @@
 #include "delay.h"
 #include "led.h"
 
+void led_set_pin_output(uint32_t prt, uint16_t pin);
+
 void led_set_pin_output(uint32_t prt, uint16_t pin) {
     gpio_mode_setup(prt, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, pin);
 }

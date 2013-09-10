@@ -6,6 +6,10 @@
 char sentence_pre_buffer[256 - 10];
 char sentence_buffer[256];
 
+uint16_t crc_update(uint16_t crc, uint8_t data);
+uint16_t sentence_calc_checksum(void);
+void sentence_finalise(void);
+
 uint16_t crc_update(uint16_t crc, uint8_t data) {
     int i;
 
@@ -21,7 +25,7 @@ uint16_t crc_update(uint16_t crc, uint8_t data) {
     return crc;
 }
 
-uint16_t sentence_calc_checksum(void) {
+uint16_t sentence_calc_checksum() {
     uint16_t crc = 0xFFFF;
     uint8_t i;
     for(i=0; i<strlen(sentence_pre_buffer); i++)
@@ -29,7 +33,7 @@ uint16_t sentence_calc_checksum(void) {
     return crc;
 }
 
-void sentence_finalise(void) {
+void sentence_finalise() {
     uint16_t crc = sentence_calc_checksum();
 
     sprintf(sentence_buffer, "$$$$$$%s*%04X\n", sentence_pre_buffer, crc);

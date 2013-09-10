@@ -31,7 +31,7 @@ float tmp_read_temperature(void) {
     // Store signed temperature info (12 bit from device, with 4LSBs = 0)
     int16_t temperature;
     // Dummy variable to store read results from registers that must be read
-    uint32_t reg;
+    __attribute__((__unused__)) uint32_t reg;
 
     // Send START
     i2c_send_start(I2C1);

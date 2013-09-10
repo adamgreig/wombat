@@ -9,11 +9,24 @@ const uint8_t gps_position_request[8] = {
 const uint8_t gps_time_request[8] = {
     0xB5, 0x62, 0x01, 0x21, 0x00, 0x00, 0x22, 0x67};
 
+// Private prototypes
+gps_data gps_init_data(void);
+void gps_request(const uint8_t* message);
+uint8_t gps_read_byte(void);
+void gps_read_message(uint8_t* buffer, uint8_t length);
+uint16_t gps_ubx_checksum(uint8_t* bytes, uint8_t length);
+uint8_t gps_bad_header(uint8_t* msg);
+uint8_t gps_bad_id(uint8_t* msg, uint8_t id);
+uint8_t gps_bad_checksum(uint8_t* msg, uint8_t length);
+gps_data gps_get_status(void);
+gps_data gps_get_time(void);
+gps_data gps_get_position(void);
+
 /* Create a filled in gps_data for later use. Sets impossible or invalid values
  * for everything to make it easy to spot if things are being used
  * unititialised (2989 = 0xBAD).
  */
-gps_data gps_init_data(void) {
+gps_data gps_init_data() {
     gps_data data;
     data.latitude = 2989.0;
     data.longitude = 2989.0;
@@ -26,7 +39,7 @@ gps_data gps_init_data(void) {
     return data;
 }
 
-void gps_peripheral_setup(void) {
+void gps_peripheral_setup() {
     gpio_mode_setup(GPS_USART_GPIO, GPIO_MODE_AF, GPIO_PUPD_NONE,
             GPS_USART_PINS);
     // Set this manually for now, due to a libopencm3 bug
@@ -49,7 +62,7 @@ void gps_request(const uint8_t* message) {
         usart_send_blocking(GPS_USART, message[i]);
 }
 
-uint8_t gps_read_byte(void) {
+uint8_t gps_read_byte() {
     uint16_t b = usart_recv_blocking(GPS_USART);
     return (uint8_t)(b & 0xFF);
 }
@@ -99,7 +112,7 @@ uint8_t gps_bad_checksum(uint8_t* msg, uint8_t length) {
     return 0;
 }
 
-gps_data gps_get_status(void) {
+gps_data gps_get_status() {
     printf("Getting status...");
     gps_data data = gps_init_data();
     uint8_t msg[24];
@@ -126,7 +139,7 @@ gps_data gps_get_status(void) {
     return data;
 }
 
-gps_data gps_get_time(void) {
+gps_data gps_get_time() {
     printf("Getting time...");
     gps_data data = gps_init_data();
     uint8_t msg[28];
@@ -157,7 +170,7 @@ gps_data gps_get_time(void) {
     return data;
 }
 
-gps_data gps_get_position(void) {
+gps_data gps_get_position() {
     printf("Getting position...");
     gps_data data = gps_init_data();
     uint8_t msg[36];
@@ -188,7 +201,7 @@ gps_data gps_get_position(void) {
     return data;
 }
 
-gps_data gps_get_data(void) {
+gps_data gps_get_data() {
     gps_data data = gps_init_data();
 
     gps_data status = gps_get_status();

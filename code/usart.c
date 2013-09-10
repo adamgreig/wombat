@@ -6,6 +6,8 @@
 
 #include "usart.h"
 
+int _write(int file, char* ptr, int len);
+
 void usart_peripheral_setup(void) {
     gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO9);
     gpio_set_af(GPIOA, GPIO_AF7, GPIO9);
