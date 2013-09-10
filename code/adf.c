@@ -265,7 +265,7 @@ void adf_set_vco_adjust(uint8_t adjust) {
 void adf_set_frequency(uint32_t khz) {
     uint32_t f_pfd = 24576;
     uint8_t n = (khz*10) / f_pfd;
-    uint32_t m = (u64)((u64)khz * 10000) / f_pfd;
+    uint32_t m = (uint64_t)((uint64_t)khz * 10000) / f_pfd;
     m -= n * 1000;
     m *= 4096;
     m /= 1000;
