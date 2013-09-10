@@ -29,9 +29,9 @@ void tmp_peripheral_setup(void) {
 
 float tmp_read_temperature(void) {
     // Store signed temperature info (12 bit from device, with 4LSBs = 0)
-    s16 temperature;
+    int16_t temperature;
     // Dummy variable to store read results from registers that must be read
-    u32 reg;
+    uint32_t reg;
 
     // Send START
     i2c_send_start(I2C1);
@@ -45,7 +45,7 @@ float tmp_read_temperature(void) {
     reg = I2C1_SR2;
     I2C1_CR1 |= I2C_CR1_ACK;
     while(!(I2C1_SR1 & I2C_SR1_BTF));
-    temperature = (u16)(I2C1_DR << 8);
+    temperature = (uint16_t)(I2C1_DR << 8);
 
     // Stop sending ACKs, send STOP, read byte two (LSB)
     I2C1_CR1 &= ~I2C_CR1_ACK;

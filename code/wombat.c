@@ -18,7 +18,7 @@
 
 
 int main(void) {
-    u32 counter;
+    uint32_t counter;
     char* sentence;
     gps_data gdata;
     sentence_data sdata;

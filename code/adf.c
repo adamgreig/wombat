@@ -8,51 +8,51 @@
 // Configuration storage structs =============================================
 struct {
     struct {
-        u16 frequency_error_correction;
-        u8 r_divider;
-        u8 crystal_doubler;
-        u8 crystal_oscillator_disable;
-        u8 clock_out_divider;
-        u8 vco_adjust;
-        u8 output_divider;
+        uint16_t frequency_error_correction;
+        uint8_t r_divider;
+        uint8_t crystal_doubler;
+        uint8_t crystal_oscillator_disable;
+        uint8_t clock_out_divider;
+        uint8_t vco_adjust;
+        uint8_t output_divider;
     } r0;
 
     struct {
-        u16 fractional_n;
-        u8 integer_n;
-        u8 prescaler;
+        uint16_t fractional_n;
+        uint8_t integer_n;
+        uint8_t prescaler;
     } r1;
 
     struct {
-        u8 mod_control;
-        u8 gook;
-        u8 power_amplifier_level;
-        u16 modulation_deviation;
-        u8 gfsk_modulation_control;
-        u8 index_counter;
+        uint8_t mod_control;
+        uint8_t gook;
+        uint8_t power_amplifier_level;
+        uint16_t modulation_deviation;
+        uint8_t gfsk_modulation_control;
+        uint8_t index_counter;
     } r2;
 
     struct {
-        u8 pll_enable;
-        u8 pa_enable;
-        u8 clkout_enable;
-        u8 data_invert;
-        u8 charge_pump_current;
-        u8 bleed_up;
-        u8 bleed_down;
-        u8 vco_disable;
-        u8 muxout;
-        u8 ld_precision;
-        u8 vco_bias;
-        u8 pa_bias;
-        u8 pll_test_mode;
-        u8 sd_test_mode;
+        uint8_t pll_enable;
+        uint8_t pa_enable;
+        uint8_t clkout_enable;
+        uint8_t data_invert;
+        uint8_t charge_pump_current;
+        uint8_t bleed_up;
+        uint8_t bleed_down;
+        uint8_t vco_disable;
+        uint8_t muxout;
+        uint8_t ld_precision;
+        uint8_t vco_bias;
+        uint8_t pa_bias;
+        uint8_t pll_test_mode;
+        uint8_t sd_test_mode;
     } r3;
 } adf_config;
 
 // Prototypes for internal functions =========================================
-void adf_set_pin_output(u32 prt, u16 pin);
-void adf_set_pin_input(u32 prt, u16 pin);
+void adf_set_pin_output(uint32_t prt, uint16_t pin);
+void adf_set_pin_input(uint32_t prt, uint16_t pin);
 void adf_reset_register_zero(void);
 void adf_reset_register_one(void);
 void adf_reset_register_two(void);
@@ -62,17 +62,17 @@ void adf_write_register_zero(void);
 void adf_write_register_one(void);
 void adf_write_register_two(void);
 void adf_write_register_three(void);
-void adf_write_register(u32 reg);
-void adf_transmit_byte(u8 byte, u32 baud);
-void adf_transmit_bit(u8 bit);
-u8 adf_read_muxout(void);
+void adf_write_register(uint32_t reg);
+void adf_transmit_byte(uint8_t byte, uint32_t baud);
+void adf_transmit_bit(uint8_t bit);
+uint8_t adf_read_muxout(void);
 
 // STM32 peripheral functions ================================================
-void adf_set_pin_output(u32 prt, u16 pin) {
+void adf_set_pin_output(uint32_t prt, uint16_t pin) {
     gpio_mode_setup(prt, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, pin);
 }
 
-void adf_set_pin_input(u32 prt, u16 pin) {
+void adf_set_pin_input(uint32_t prt, uint16_t pin) {
     gpio_mode_setup(prt, GPIO_MODE_INPUT, GPIO_PUPD_NONE, pin);
 }
 
@@ -171,7 +171,7 @@ void adf_write_config(void) {
 }
 
 void adf_write_register_zero(void) {
-    u32 reg =
+    uint32_t reg =
         (0) |
         ((adf_config.r0.frequency_error_correction  & 0x7FF) <<  2) |
         ((adf_config.r0.r_divider                   & 0xF  ) << 13) |
@@ -184,7 +184,7 @@ void adf_write_register_zero(void) {
 }
 
 void adf_write_register_one(void) {
-    u32 reg =
+    uint32_t reg =
         (1) |
         ((adf_config.r1.fractional_n                & 0xFFF) <<  2) |
         ((adf_config.r1.integer_n                   & 0xFF ) << 14) |
@@ -193,7 +193,7 @@ void adf_write_register_one(void) {
 }
 
 void adf_write_register_two(void) {
-    u32 reg =
+    uint32_t reg =
         (2) |
         ((adf_config.r2.mod_control                 & 0x3  ) <<  2) |
         ((adf_config.r2.gook                        & 0x1  ) <<  4) |
@@ -205,7 +205,7 @@ void adf_write_register_two(void) {
 }
 
 void adf_write_register_three(void) {
-    u32 reg =
+    uint32_t reg =
         (3) |
         ((adf_config.r3.pll_enable                  & 0x1  ) <<  2) |
         ((adf_config.r3.pa_enable                   & 0x1  ) <<  3) |
@@ -224,8 +224,8 @@ void adf_write_register_three(void) {
     adf_write_register(reg);
 }
 
-void adf_write_register(u32 data) {
-    s8 i;
+void adf_write_register(uint32_t data) {
+    int8_t i;
 
     gpio_clear(ADF_CLK_PORT, ADF_CLK);
     delay_ns(20);
@@ -250,86 +250,86 @@ void adf_write_register(u32 data) {
 }
 
 // Configuration setting functions ---------------------------------------
-void adf_set_frequency_error_correction(u16 error) {
+void adf_set_frequency_error_correction(uint16_t error) {
     adf_config.r0.frequency_error_correction = error;
 }
 
-void adf_set_r_divider(u8 r) {
+void adf_set_r_divider(uint8_t r) {
     adf_config.r0.r_divider = r;
 }
 
-void adf_set_vco_adjust(u8 adjust) {
+void adf_set_vco_adjust(uint8_t adjust) {
     adf_config.r0.vco_adjust = adjust;
 }
 
-void adf_set_frequency(u32 khz) {
-    u32 f_pfd = 24576;
-    u8 n = (khz*10) / f_pfd;
-    u32 m = (u64)((u64)khz * 10000) / f_pfd;
+void adf_set_frequency(uint32_t khz) {
+    uint32_t f_pfd = 24576;
+    uint8_t n = (khz*10) / f_pfd;
+    uint32_t m = (u64)((u64)khz * 10000) / f_pfd;
     m -= n * 1000;
     m *= 4096;
     m /= 1000;
     adf_set_n(n);
-    adf_set_m((u16)m);
+    adf_set_m((uint16_t)m);
 }
 
-void adf_set_n(u8 n) {
+void adf_set_n(uint8_t n) {
     adf_config.r1.integer_n = n;
 }
 
-void adf_set_m(u16 m) {
+void adf_set_m(uint16_t m) {
     adf_config.r1.fractional_n = m;
 }
 
-void adf_set_pa_level(u8 level) {
+void adf_set_pa_level(uint8_t level) {
     adf_config.r2.power_amplifier_level = level;
 }
 
-void adf_set_pll_enable(u8 enable) {
+void adf_set_pll_enable(uint8_t enable) {
     adf_config.r3.pll_enable = enable;
 }
 
-void adf_set_pa_enable(u8 enable) {
+void adf_set_pa_enable(uint8_t enable) {
     adf_config.r3.pa_enable = enable;
 }
 
-void adf_set_clkout_enable(u8 enable) {
+void adf_set_clkout_enable(uint8_t enable) {
     adf_config.r3.clkout_enable = enable;
 }
 
-void adf_set_charge_pump_current(u8 current) {
+void adf_set_charge_pump_current(uint8_t current) {
     adf_config.r3.charge_pump_current = current;
 }
 
-void adf_set_vco_disable(u8 disable) {
+void adf_set_vco_disable(uint8_t disable) {
     adf_config.r3.vco_disable = disable;
 }
 
-void adf_set_muxout(u8 muxout) {
+void adf_set_muxout(uint8_t muxout) {
     adf_config.r3.muxout = muxout;
 }
 
-void adf_set_vco_bias(u8 bias) {
+void adf_set_vco_bias(uint8_t bias) {
     adf_config.r3.vco_bias = bias;
 }
 
-void adf_set_pa_bias(u8 bias) {
+void adf_set_pa_bias(uint8_t bias) {
     adf_config.r3.pa_bias = bias;
 }
 
-u8 adf_get_n() {
+uint8_t adf_get_n() {
     return adf_config.r1.integer_n;
 }
 
-u16 adf_get_m() {
+uint16_t adf_get_m() {
     return adf_config.r1.fractional_n;
 }
 
-u8 adf_get_vco_adjust(void) {
+uint8_t adf_get_vco_adjust(void) {
     return adf_config.r0.vco_adjust;
 }
 
-u8 adf_get_vco_bias(void) {
+uint8_t adf_get_vco_bias(void) {
     return adf_config.r3.vco_bias;
 }
 
@@ -342,8 +342,8 @@ void adf_setup(void) {
     adf_write_config();
 }
 
-u8 adf_lock(void) {
-    u8 adj = 0, bias = 5;
+uint8_t adf_lock(void) {
+    uint8_t adj = 0, bias = 5;
     while(!adf_locked()) {
         adf_set_vco_adjust(adj);
         adf_set_vco_bias(bias);
@@ -371,14 +371,14 @@ void adf_power_off(void) {
 }
 
 // Data transmission functions ===============================================
-void adf_transmit_string(char* data, u32 baud) {
-    u32 i;
+void adf_transmit_string(char* data, uint32_t baud) {
+    uint32_t i;
     for(i=0; data[i]; i++)
         adf_transmit_byte(data[i], baud);
 }
 
-void adf_transmit_byte(u8 byte, u32 baud) {
-    s8 i;
+void adf_transmit_byte(uint8_t byte, uint32_t baud) {
+    int8_t i;
     
     led_quickflash(LED4);
 
@@ -401,7 +401,7 @@ void adf_transmit_byte(u8 byte, u32 baud) {
     delay(baud);
 }
 
-void adf_transmit_bit(u8 bit) {
+void adf_transmit_bit(uint8_t bit) {
     if(bit) {
         gpio_set(ADF_TXDATA_PORT, ADF_TXDATA);
     } else {
@@ -410,14 +410,14 @@ void adf_transmit_bit(u8 bit) {
 }
 
 // MUXOUT reading functions ==================================================
-u8 adf_read_muxout(void) {
-    return (u8)(gpio_get(ADF_MUXOUT_PORT, ADF_MUXOUT) > 0);
+uint8_t adf_read_muxout(void) {
+    return (uint8_t)(gpio_get(ADF_MUXOUT_PORT, ADF_MUXOUT) > 0);
 }
 
-u8 adf_locked(void) {
+uint8_t adf_locked(void) {
     return adf_read_muxout();
 }
 
-u8 adf_reg_ready(void) {
+uint8_t adf_reg_ready(void) {
     return adf_read_muxout();
 }

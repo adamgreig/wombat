@@ -8,35 +8,35 @@ void adf_peripheral_setup(void);
 void adf_turn_off(void);
 void adf_reset_config(void);
 void adf_write_config(void);
-void adf_transmit_string(char* data, u32 baud);
-u8 adf_locked(void);
-u8 adf_reg_ready(void);
+void adf_transmit_string(char* data, uint32_t baud);
+uint8_t adf_locked(void);
+uint8_t adf_reg_ready(void);
 
-void adf_set_frequency_error_correction(u16 error);
-void adf_set_r_divider(u8 r);
-void adf_set_vco_adjust(u8 adjust);
-void adf_set_frequency(u32 khz);
-void adf_set_n(u8 n);
-void adf_set_m(u16 m);
-void adf_set_pa_level(u8 level);
-void adf_set_pll_enable(u8 enable);
-void adf_set_pa_enable(u8 enable);
-void adf_set_clkout_enable(u8 enable);
-void adf_set_charge_pump_current(u8 current);
-void adf_set_vco_disable(u8 disable);
-void adf_set_muxout(u8 muxout);
-void adf_set_vco_bias(u8 bias);
-void adf_set_pa_bias(u8 bias);
+void adf_set_frequency_error_correction(uint16_t error);
+void adf_set_r_divider(uint8_t r);
+void adf_set_vco_adjust(uint8_t adjust);
+void adf_set_frequency(uint32_t khz);
+void adf_set_n(uint8_t n);
+void adf_set_m(uint16_t m);
+void adf_set_pa_level(uint8_t level);
+void adf_set_pll_enable(uint8_t enable);
+void adf_set_pa_enable(uint8_t enable);
+void adf_set_clkout_enable(uint8_t enable);
+void adf_set_charge_pump_current(uint8_t current);
+void adf_set_vco_disable(uint8_t disable);
+void adf_set_muxout(uint8_t muxout);
+void adf_set_vco_bias(uint8_t bias);
+void adf_set_pa_bias(uint8_t bias);
 
 void adf_setup(void);
 void adf_power_on(void);
 void adf_power_off(void);
-u8 adf_lock(void);
+uint8_t adf_lock(void);
 
-u8 adf_get_n(void);
-u16 adf_get_m(void);
-u8 adf_get_vco_adjust(void);
-u8 adf_get_vco_bias(void);
+uint8_t adf_get_n(void);
+uint16_t adf_get_m(void);
+uint8_t adf_get_vco_adjust(void);
+uint8_t adf_get_vco_bias(void);
 
 // The ADF7012 pin connections ===============================================
 #define ADF_CLK         GPIO5
@@ -57,9 +57,9 @@ u8 adf_get_vco_bias(void);
 #define ADF_TXDATA_PORT GPIOB
 
 // Timing constants ==========================================================
-#define ADF_50_BAUD     (u32)(479441)
-#define ADF_300_BAUD    (u32)(79915)
-#define ADF_1200_BAUD   (u32)(19979)
+#define ADF_50_BAUD     (uint32_t)(479441)
+#define ADF_300_BAUD    (uint32_t)(79915)
+#define ADF_1200_BAUD   (uint32_t)(19979)
 
 // General Purpose ===========================================================
 #define ADF_OFF 0

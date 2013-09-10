@@ -1,14 +1,14 @@
 #include "delay.h"
 
-void delay(u32 count) {
-    u32 i;
+void delay(uint32_t count) {
+    uint32_t i;
     for(i=0; i<count; i++)
         __asm__("nop");
 }
 
-void delay_ns(u32 ns) {
+void delay_ns(uint32_t ns) {
     if(ns > DELAY_MAX_NS) {
-        u8 i;
+        uint8_t i;
         for(i=0; i<(ns / DELAY_MAX_NS) - 1; i++)
             delay(0xFFFFFFFF);
         delay(ns % DELAY_MAX_NS);
@@ -17,9 +17,9 @@ void delay_ns(u32 ns) {
     }
 }
 
-void delay_ms(u32 ms) {
+void delay_ms(uint32_t ms) {
     if(ms > DELAY_MAX_MS) {
-        u8 i;
+        uint8_t i;
         for(i=0; i<(ms / DELAY_MAX_MS) - 1; i++)
             delay(0xFFFFFFFF);
         delay(ms % DELAY_MAX_MS);

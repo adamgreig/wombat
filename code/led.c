@@ -3,7 +3,7 @@
 #include "delay.h"
 #include "led.h"
 
-void led_set_pin_output(u32 prt, u16 pin) {
+void led_set_pin_output(uint32_t prt, uint16_t pin) {
     gpio_mode_setup(prt, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, pin);
 }
 
@@ -14,11 +14,11 @@ void led_peripheral_setup() {
     led_set_pin_output(GPIOC, GPIO3);
 }
 
-void led_turn_on(u8 leds) {
+void led_turn_on(uint8_t leds) {
     gpio_set(GPIOC, leds & 15);
 }
 
-void led_turn_off(u8 leds) {
+void led_turn_off(uint8_t leds) {
     gpio_clear(GPIOC, leds & 15);
 }
 
@@ -58,14 +58,14 @@ void led_flash_inner(void) {
     led_turn_off(LED2|LED3);
 }
 
-void led_quickflash(u8 leds) {
+void led_quickflash(uint8_t leds) {
     led_turn_off(~leds);
     led_turn_on(leds);
     delay_ms(1);
     led_turn_off(leds);
 }
 
-void led_flash(u8 leds) {
+void led_flash(uint8_t leds) {
     led_turn_off(~leds);
     led_turn_on(leds);
     delay_ms(100);

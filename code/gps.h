@@ -6,8 +6,8 @@
 
 typedef struct gps_data_struct {
     double latitude, longitude;
-    s32 altitude;
-    u8 hour, minute, second, lock_valid, data_valid;
+    int32_t altitude;
+    uint8_t hour, minute, second, lock_valid, data_valid;
 } gps_data;
 
 void gps_peripheral_setup(void);

@@ -6,7 +6,7 @@
 #include "gps.h"
 
 typedef struct sentence_data_struct {
-    u32 counter;
+    uint32_t counter;
     gps_data gps;
     float temperature;
 } sentence_data;
